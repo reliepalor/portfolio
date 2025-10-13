@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import { useState, useRef, useEffect } from "react";
 
 import { AnimatedSection } from "@/components/common/animated-section";
 import { AnimatedText } from "@/components/common/animated-text";
@@ -84,11 +85,11 @@ export default function IndexPage() {
           <div className="absolute top-2/3 right-1/4 w-0.5 h-0.5 bg-primary/50 rounded-full animate-pulse delay-500" />
         </div>
 
-        <div className="container mx-auto px-4 h-screen flex items-center">
-          <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center w-full">
             
             {/* Left Column - Content */}
-            <div className="space-y-8 lg:space-y-12">
+            <div className="space-y-6 lg:space-y-12">
               {/* Status Indicator */}
               <AnimatedText delay={0.1}>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium mt-2">
@@ -132,27 +133,27 @@ export default function IndexPage() {
 
               {/* Action Buttons with Unique Style */}
               <AnimatedText delay={0.8}>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <Link
                     href={siteConfig.links.github}
                     target="_blank"
-                    className="group relative overflow-hidden rounded-xl bg-foreground text-background px-8 py-3 font-medium transition-all duration-300 hover:shadow-lg hover:shadow-foreground/25"
+                    className="group relative overflow-hidden rounded-xl bg-foreground text-background px-6 sm:px-8 py-3 font-medium transition-all duration-300 hover:shadow-lg hover:shadow-foreground/25"
                     aria-label={`View ${siteConfig.authorName}'s GitHub profile`}
                   >
                     <span className="relative z-10 flex items-center gap-2">
-                      <Icons.gitHub className="w-5 h-5" />
+                      <Icons.gitHub className="w-4 h-4 sm:w-5 sm:h-5" />
                       Github
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/30 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                   </Link>
-                  
+
                   <Link
                     href="/contact"
                     className="group flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300"
                     aria-label={`Contact ${siteConfig.authorName}`}
                   >
                     <span className="font-medium">Let's connect</span>
-                    <Icons.contact className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    <Icons.contact className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </AnimatedText>
@@ -183,7 +184,7 @@ export default function IndexPage() {
 
       {/* Rest of the sections remain the same */}
       <AnimatedSection
-        className="container space-y-6 bg-muted py-10"
+        className="container space-y-6 bg-muted py-8 sm:py-10"
         id="skills"
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
@@ -213,7 +214,7 @@ export default function IndexPage() {
 
       <AnimatedSection
         direction="right"
-        className="container space-y-6 py-10 my-14"
+        className="container space-y-6 py-8 sm:py-10 my-8 sm:my-14"
         id="projects"
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
@@ -231,15 +232,16 @@ export default function IndexPage() {
             {pagesConfig.projects.description}
           </AnimatedText>
         </div>
-        <div className="mx-auto grid justify-center gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex gap-4 overflow-x-auto pb-4">
           {featuredProjects.map((exp, index) => (
-            <AnimatedSection
-              key={exp.id}
-              delay={0.1 * (index + 1)}
-              direction="up"
-            >
-              <ProjectCard project={exp as any} />
-            </AnimatedSection>
+            <div key={exp.id} className="flex-shrink-0 w-80">
+              <AnimatedSection
+                delay={0.1 * (index + 1)}
+                direction="up"
+              >
+                <ProjectCard project={exp as any} />
+              </AnimatedSection>
+            </div>
           ))}
         </div>
         <AnimatedText delay={0.4} className="flex justify-center">
