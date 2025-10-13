@@ -20,6 +20,7 @@ import { siteConfig } from "../../config/site";
 import { featuredSkills } from "../../config/skills";
 import { cn } from "@/lib/utils";
 import profileImg from "@/assets/image/profile-img.jpg";
+import RightVisual from "@/components/common/RightVisual";
 
 export const metadata: Metadata = {
   title: pagesConfig.home.metadata.title,
@@ -90,7 +91,7 @@ export default function IndexPage() {
             <div className="space-y-8 lg:space-y-12">
               {/* Status Indicator */}
               <AnimatedText delay={0.1}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium mt-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                   studying...
                 </div>
@@ -166,61 +167,7 @@ export default function IndexPage() {
             </div>
 
             {/* Right Column - Visual Element */}
-            <div className="relative flex justify-center lg:justify-end">
-              <AnimatedText delay={0.5}>
-                <div className="relative">
-                  {/* Floating Card Container */}
-                  <div className="relative bg-card border border-border/50 rounded-2xl p-8 shadow-xl backdrop-blur-sm">
-                    {/* Profile Image with Modern Frame */}
-                    <div className="relative mb-6">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-full blur-sm hover:shadow-lg" />  
-                      <Image
-                        src={profileImg}
-                        height={120}
-                        width={120}
-                        sizes="120px"
-                        className="relative rounded-full w-[120px] h-[120px] hover:scale-105 duration-200 ease-in-out object-cover border-2 border-background cursor-pointer"
-                        alt={`${siteConfig.authorName} - Developer Portfolio`}
-                        priority
-                      />
-                    </div>
-
-                    {/* Quick Info */}
-                    <div className="space-y-3 text-center">
-                      <div className="text-sm text-muted-foreground font-mono">
-                        Web Developer
-                      </div>
-                      
-                      {/* Quick Stats */}
-                      <div className="flex justify-center gap-6 text-xs ">
-                        <div className="w-[7rem] text-center">
-                          <div className="font-bold text-primary"></div>
-                          <div className="text-muted-foreground"></div>
-                        </div>
-                        <div className="w-px bg-border" />
-                        <div className="text-center">
-                          <div className="font-bold text-primary"></div>
-                          <div className="text-muted-foreground"></div>
-                        </div>
-                        <div className="w-px bg-border" />
-                        <div className="text-center">
-                          <div className="font-bold text-primary"></div>
-                          <div className="text-muted-foreground"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Decorative Elements */}
-                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full opacity-60" />
-                    <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-primary/40 rounded-full opacity-40" />
-                  </div>
-
-                  {/* Floating Background Elements */}
-                  <div className="absolute -z-10 top-4 -right-4 w-24 h-24 bg-primary/5 rounded-full blur-xl" />
-                  <div className="absolute -z-10 -bottom-4 -left-4 w-16 h-16 bg-primary/3 rounded-full blur-lg" />
-                </div>
-              </AnimatedText>
-            </div>
+            <RightVisual/>
           </div>
         </div>
 
@@ -284,7 +231,7 @@ export default function IndexPage() {
             {pagesConfig.projects.description}
           </AnimatedText>
         </div>
-        <div className="mx-auto grid justify-center gap-4 md:w-full lg:grid-cols-3">
+        <div className="mx-auto grid justify-center gap-4 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((exp, index) => (
             <AnimatedSection
               key={exp.id}
