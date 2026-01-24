@@ -60,7 +60,11 @@ export type ValidSkills =
   | "FastAPI"
   | "SQL"
   | "NoSQL"
-  | "Framer Motion";
+  | "Framer Motion"
+  | "ASP.NET Core Web API"
+  | "Entity Framework Core"
+  | "JWT Authentication"
+  | "SQL Server";
 
 export type ValidCategory =
   | "Full Stack"
@@ -69,7 +73,8 @@ export type ValidCategory =
   | "UI/UX"
   | "Web Dev"
   | "Mobile Dev"
-  | "3D Modeling";
+  | "3D Modeling"
+  | "API";
 
 export type ValidExpType = "Personal" | "Professional";
 

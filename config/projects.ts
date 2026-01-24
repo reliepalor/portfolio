@@ -40,22 +40,22 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-01-01", 
     endDate: "2023-03-01",
-    companyLogoImg: "/projects/paw-haven/logo.png", // placeholder
+    companyLogoImg: "/projects/paw-haven/logo.png",
     pagesInfoArr: [
       {
         title: "Landing Page",
         description: "A clean landing page showcasing featured pets, products, and offers.",
-        imgArr: ["/projects/paw-haven/landing.png"], // placeholder
+        imgArr: ["/projects/paw-haven/landing.png"],
       },
       {
         title: "Product Browsing",
         description: "Browse pets, accessories, and food with category filters.",
-        imgArr: ["/projects/paw-haven/products.png"], // placeholder
+        imgArr: ["/projects/paw-haven/products.png"],
       },
       {
         title: "Order System",
         description: "Integrated checkout with order confirmation via email.",
-        imgArr: ["/projects/paw-haven/orders.png"], // placeholder
+        imgArr: ["/projects/paw-haven/orders.png"],
       },
     ],
     descriptionDetails: {
@@ -84,22 +84,22 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
-    companyLogoImg: "/projects/smart-lib/dashboard.png", // placeholder
+    companyLogoImg: "/projects/smart-lib/dashboard.png",
     pagesInfoArr: [
       {
         title: "Librarian Dashboard",
         description: "Overview of Student List, number of student registered, charts and analytics.",
-        imgArr: ["/projects/smart-lib/dashboard.png"] // placeholder
+        imgArr: ["/projects/smart-lib/dashboard.png"]
       },
       {
         title: "QR Code Attendance",
         description: "Attendance tracking using QR Code, students can Borrow and return books using QR code scanning.",
-        imgArr: ["/projects/smart-lib/qr.png", "/projects/smart-lib/qr1.png"], // placeholder
+        imgArr: ["/projects/smart-lib/qr.png", "/projects/smart-lib/qr1.png"],
       },
       {
         title: "Books",
         description: "Access to books from library and Internet books.",
-        imgArr: ["/projects/smart-lib/books.png", "/projects/smart-lib/books1.png"], // placeholder
+        imgArr: ["/projects/smart-lib/books.png", "/projects/smart-lib/books1.png"],
       },
     ],
     descriptionDetails: {
@@ -127,17 +127,17 @@ export const Projects: ProjectInterface[] = [
     techStack: ["HTML 5", "CSS 3", "Javascript"],
     startDate: "2023-07-01", // adjust
     endDate: "2023-07-14",
-    companyLogoImg: "/projects/math-games/math-bg.png", // placeholder
+    companyLogoImg: "/projects/math-games/math-bg.png",
     pagesInfoArr: [
       {
         title: "Games",
         description: "Selection of interactive math games with different levels.",
-        imgArr: ["/projects/math-games/games.png"], // placeholder
+        imgArr: ["/projects/math-games/games.png"],
       },
       {
         title: "Game Description",
         description: "Interactive gameplay with description for children to follow instructions.",
-        imgArr: ["/projects/math-games/description.png"], // placeholder
+        imgArr: ["/projects/math-games/description.png"],
       },
     ],
     descriptionDetails: {
@@ -164,22 +164,22 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Next.js", "Typescript", "Tailwind CSS"],
     startDate: "2023-08-01",
     endDate: "2023-08-14",
-    companyLogoImg: "/projects/portfolio/logo.png", // placeholder
+    companyLogoImg: "/projects/portfolio/logo.png",
     pagesInfoArr: [
       {
         title: "Home Page",
         description: "Landing section with introduction and quick navigation.",
-        imgArr: ["/projects/portfolio/logo.png"], // placeholder
+        imgArr: ["/projects/portfolio/logo.png"],
       },
       {
         title: "Projects Page",
         description: "Showcase of featured projects with details.",
-        imgArr: ["/projects/portfolio/logo.png"], // placeholder
+        imgArr: ["/projects/portfolio/logo.png"],
       },
       {
         title: "Contact Page",
         description: "Simple contact form and social links.",
-        imgArr: ["/projects/portfolio/logo.png"], // placeholder
+        imgArr: ["/projects/portfolio/logo.png"],
       },
     ],
     descriptionDetails: {
@@ -194,6 +194,68 @@ export const Projects: ProjectInterface[] = [
       ],
     },
   },
+{
+  id: "videogame-ecommerce",
+  companyName: "Video Game E-commerce Platform",
+  type: "Personal",
+  category: ["Full Stack", "Web Dev", "API"],
+  shortDescription:
+    "A full-stack video game e-commerce platform featuring cart management, order approval workflow, admin dashboard analytics, and a review & rating system.",
+  websiteLink: undefined,
+  githubLink: undefined,
+  techStack: [
+    "ASP.NET Core Web API",
+    "Entity Framework Core",
+    "JWT Authentication",
+    "Angular",
+    "Tailwind CSS",
+    "SQL Server"
+  ],
+  startDate: "2025-12-01",
+  endDate: "2026-01-20",
+  companyLogoImg: "/projects/videogames/user-dashboard.png",
+  pagesInfoArr: [
+    {
+      title: "User Welcome Page",
+      description:
+        "Users can view the Welcome Page with some videogames graphics.",
+      imgArr: ["/projects/videogames/user-dashboard.png"],
+    },
+    {
+      title: "Games List",
+      description:
+        "Users can view the available games.",
+      imgArr: ["/projects/videogames/user-games.png"],
+    },
+    {
+      title: "Order History",
+      description:
+        "Users can see their order history weather its Pending, Approved, or Rejected.",
+      imgArr: ["/projects/videogames/user-myorders.png"],
+    },
+    {
+      title: "Carts",
+      description: "Users can view their carts.",
+      imgArr: ["/projects/videogames/user-cart.png "],
+    }
+  ],
+  descriptionDetails: {
+    paragraphs: [
+      "This project is a full-stack video game e-commerce system built with a strong focus on real-world business logic and clean API design. It supports user authentication, cart handling, order checkout, and an admin-controlled approval workflow.",
+      "Orders require admin approval before users receive system-generated product keys, simulating real digital product delivery. The platform also includes analytics dashboards and a verified reviews & ratings system.",
+      "The frontend is built with Angular and styled using Tailwind CSS, emphasizing clean UI, usability, and responsive design."
+    ],
+    bullets: [
+      "Implemented cart functionality with item selection, filtering, quantity updates, and subtotal calculations.",
+      "Built an order approval workflow where admins approve or reject orders and assign product keys.",
+      "Developed an admin dashboard showing total revenue, total items sold, and per-game sales analytics.",
+      "Implemented a verified reviews & ratings system allowing only approved buyers to review games.",
+      "Used JWT authentication with role-based access control (User / Admin).",
+      "Designed RESTful APIs using ASP.NET Core and Entity Framework Core."
+    ],
+  },
+}
+
 ];
 
 export const featuredProjects = Projects.slice(0, 3);
