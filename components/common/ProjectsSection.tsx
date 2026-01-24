@@ -5,7 +5,7 @@ import { AnimatedSection } from "./animated-section";
 import { AnimatedText } from "./animated-text";
 import ProjectCard from "@/components/projects/project-card";
 import { Button } from "@/components/ui/button";
-import { Icons } from "../icons";
+import { Icons} from "@/components/common/icons";
 import Link from "next/link";
 import { pagesConfig } from "../../config/pages";
 import { featuredProjects } from "../../config/projects";

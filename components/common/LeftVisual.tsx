@@ -109,6 +109,7 @@ const LeftVisual = () => {
                     className="group flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300"
                     aria-label={`Contact ${siteConfig.authorName}`}
                   >
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <span className="font-medium">Let's connect</span>
                     <Icons.contact className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
