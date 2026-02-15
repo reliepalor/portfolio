@@ -42,12 +42,12 @@ export async function generateMetadata({
 
   if (!experience) {
     return {
-      title: "Experience Not Found",
+      title: siteConfig.name,
     };
   }
 
   return {
-    title: `${experience.position} at ${experience.company} | Experience`,
+    title: siteConfig.name,
     description: `Detailed information about my role as ${experience.position} at ${experience.company}.`,
     alternates: {
       canonical: `${siteConfig.url}/experience/${params.expId}`,

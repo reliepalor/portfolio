@@ -24,10 +24,7 @@ interface RootLayoutProps {
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
+  title: siteConfig.name,
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   authors: [
@@ -103,7 +100,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={cn(fontSans.variable, fontHeading.variable)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           themes={["light", "dark"]}
         >

@@ -7,7 +7,7 @@ import { pagesConfig } from "../../../config/pages";
 import { siteConfig } from "../../../config/site";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.experience.metadata.title} | Professional Experience Timeline`,
+  title: siteConfig.name,
   description: `${pagesConfig.experience.metadata.description} Explore my professional journey and career milestones in software development.`,
   keywords: [
     "experience timeline",

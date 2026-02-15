@@ -47,7 +47,7 @@ const aboutData: AboutData = {
 };
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.about.metadata.title} | ${siteConfig.name}`,
+  title: siteConfig.name,
   description:
     "Learn more about John Relie Palor, a web developer passionate about creating modern web experiences.",
   alternates: {

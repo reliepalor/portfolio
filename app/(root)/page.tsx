@@ -18,7 +18,7 @@ import { experiences } from "../../config/experience";
 import { pagesConfig } from "../../config/pages";
 import { featuredProjects } from "../../config/projects";
 import { siteConfig } from "../../config/site";
-import { featuredSkills } from "../../config/skills";
+import { skills } from "../../config/skills";
 import { cn } from "@/lib/utils";
 import profileImg from "@/assets/image/profile-img.jpg";
 import RightVisual from "@/components/common/RightVisual";
@@ -76,7 +76,7 @@ export default function IndexPage() {
       />
 
       {/* Revolutionary Hero Section */}
-      <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-background/95 to-muted/20">
+      <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-gradient-to-br from-background via-background/95 to-muted/20">
         {/* Floating geometric elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse" />
@@ -85,7 +85,7 @@ export default function IndexPage() {
           <div className="absolute top-2/3 right-1/4 w-0.5 h-0.5 bg-primary/50 rounded-full animate-pulse delay-500" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-screen flex items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-5rem)] flex items-start pt-6 sm:items-center sm:pt-0">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center w-full">
             
             {/* Left Column - Content */}
@@ -188,29 +188,23 @@ export default function IndexPage() {
         className="container space-y-6 bg-muted py-8 sm:py-10"
         id="skills"
       >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+        <div className="mx-auto flex w-full max-w-[58rem] items-center justify-between gap-4">
           <AnimatedText
             as="h2"
             className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
           >
             {pagesConfig.skills.title}
           </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.skills.description}
-          </AnimatedText>
+          {skills.length >= 12 && (
+            <Link
+              href="/skills"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground"
+            >
+              View All
+            </Link>
+          )}
         </div>
-        <SkillsCard skills={featuredSkills} />
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/skills">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
+        <SkillsCard skills={skills} compactMobile />
       </AnimatedSection>
 
       <AnimatedSection
@@ -233,16 +227,15 @@ export default function IndexPage() {
             {pagesConfig.projects.description}
           </AnimatedText>
         </div>
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {featuredProjects.map((exp, index) => (
-            <div key={exp.id} className="flex-shrink-0 w-80">
-              <AnimatedSection
-                delay={0.1 * (index + 1)}
-                direction="up"
-              >
-                <ProjectCard project={exp as any} />
-              </AnimatedSection>
-            </div>
+            <AnimatedSection
+              key={exp.id}
+              delay={0.1 * (index + 1)}
+              direction="up"
+            >
+              <ProjectCard project={exp as any} />
+            </AnimatedSection>
           ))}
         </div>
         <AnimatedText delay={0.4} className="flex justify-center">

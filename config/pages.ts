@@ -18,15 +18,15 @@ export const pagesConfig: PagesConfig = {
     title: "Home",
     description: "Welcome to my portfolio website.",
     metadata: {
-      title: "Home",
+      title: siteConfig.name,
       description: `${siteConfig.authorName}'s portfolio website.`,
     },
   },
   skills: {
-    title: "Skills",
+    title: "Tech Stack",
     description: "Key skills that define my professional identity.",
     metadata: {
-      title: "Skills",
+      title: siteConfig.name,
       description:
         `${siteConfig.authorName}'s key skills that define their professional identity.`,
     },
@@ -35,7 +35,7 @@ export const pagesConfig: PagesConfig = {
     title: "Projects",
     description: "Showcasing impactful projects and technical achievements.",
     metadata: {
-      title: "Projects",
+      title: siteConfig.name,
       description: `${siteConfig.authorName}'s projects in building web applications.`,
     },
   },
@@ -43,7 +43,7 @@ export const pagesConfig: PagesConfig = {
     title: "Contact",
     description: "Let's connect and explore collaborations.",
     metadata: {
-      title: "Contact",
+      title: siteConfig.name,
       description: `Contact ${siteConfig.authorName}.`,
     },
   },
@@ -51,7 +51,7 @@ export const pagesConfig: PagesConfig = {
     title: "Contributions",
     description: "Open-source contributions and community involvement.",
     metadata: {
-      title: "Contributions",
+      title: siteConfig.name,
       description:
         `${siteConfig.authorName}'s open-source contributions and community involvement.`,
     },
@@ -60,7 +60,7 @@ export const pagesConfig: PagesConfig = {
     title: "Resume",
     description: `${siteConfig.authorName}'s resume.`,
     metadata: {
-      title: "Resume",
+      title: siteConfig.name,
       description: `${siteConfig.authorName}'s resume.`,
     },
   },
@@ -68,7 +68,7 @@ export const pagesConfig: PagesConfig = {
     title: "Experience",
     description: "Professional journey and career timeline.",
     metadata: {
-      title: "Experience",
+      title: siteConfig.name,
       description:
         `${siteConfig.authorName}'s professional journey and experience timeline.`,
     },
@@ -77,7 +77,7 @@ export const pagesConfig: PagesConfig = {
     title: "About",
     description: "Learn more about John Relie Palor, a web developer passionate about creating modern web experiences.",
     metadata: {
-      title: "About",
+      title: siteConfig.name,
       description: "Learn more about John Relie Palor, a web developer passionate about creating modern web experiences.",
     },
   },

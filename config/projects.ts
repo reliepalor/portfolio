@@ -152,48 +152,48 @@ export const Projects: ProjectInterface[] = [
       ],
     },
   },
-  {
-    id: "web-portfolio",
-    companyName: "Personal Web Portfolio",
-    type: "Personal",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "A responsive portfolio website built with Next.js and Tailwind CSS to showcase my projects and skills.",
-    websiteLink: undefined,
-    githubLink: undefined,
-    techStack: ["Next.js", "Typescript", "Tailwind CSS"],
-    startDate: "2023-08-01",
-    endDate: "2023-08-14",
-    companyLogoImg: "/projects/portfolio/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Home Page",
-        description: "Landing section with introduction and quick navigation.",
-        imgArr: ["/projects/portfolio/logo.png"],
-      },
-      {
-        title: "Projects Page",
-        description: "Showcase of featured projects with details.",
-        imgArr: ["/projects/portfolio/logo.png"],
-      },
-      {
-        title: "Contact Page",
-        description: "Simple contact form and social links.",
-        imgArr: ["/projects/portfolio/logo.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "My personal portfolio website highlights my technical skills and project experience. Built with Next.js and Tailwind CSS, it provides a clean and responsive design.",
-        "The portfolio includes sections for featured projects, skills, and contact information.",
-      ],
-      bullets: [
-        "Developed a responsive personal portfolio using Next.js and Tailwind CSS.",
-        "Showcased featured projects with detailed descriptions.",
-        "Implemented a clean UI with a focus on accessibility and responsiveness.",
-      ],
-    },
-  },
+  // {
+  //   id: "web-portfolio",
+  //   companyName: "Personal Web Portfolio",
+  //   type: "Personal",
+  //   category: ["Web Dev", "Frontend", "UI/UX"],
+  //   shortDescription:
+  //     "A responsive portfolio website built with Next.js and Tailwind CSS to showcase my projects and skills.",
+  //   websiteLink: undefined,
+  //   githubLink: undefined,
+  //   techStack: ["Next.js", "Typescript", "Tailwind CSS"],
+  //   startDate: "2023-08-01",
+  //   endDate: "2023-08-14",
+  //   companyLogoImg: "/projects/portfolio/logo.png",
+  //   pagesInfoArr: [
+  //     {
+  //       title: "Home Page",
+  //       description: "Landing section with introduction and quick navigation.",
+  //       imgArr: ["/projects/portfolio/logo.png"],
+  //     },
+  //     {
+  //       title: "Projects Page",
+  //       description: "Showcase of featured projects with details.",
+  //       imgArr: ["/projects/portfolio/logo.png"],
+  //     },
+  //     {
+  //       title: "Contact Page",
+  //       description: "Simple contact form and social links.",
+  //       imgArr: ["/projects/portfolio/logo.png"],
+  //     },
+  //   ],
+  //   descriptionDetails: {
+  //     paragraphs: [
+  //       "My personal portfolio website highlights my technical skills and project experience. Built with Next.js and Tailwind CSS, it provides a clean and responsive design.",
+  //       "The portfolio includes sections for featured projects, skills, and contact information.",
+  //     ],
+  //     bullets: [
+  //       "Developed a responsive personal portfolio using Next.js and Tailwind CSS.",
+  //       "Showcased featured projects with detailed descriptions.",
+  //       "Implemented a clean UI with a focus on accessibility and responsiveness.",
+  //     ],
+  //   },
+  // },
 {
   id: "videogame-ecommerce",
   companyName: "Video Game E-commerce Platform",
@@ -258,4 +258,4 @@ export const Projects: ProjectInterface[] = [
 
 ];
 
-export const featuredProjects = Projects.slice(0, 3);
+export const featuredProjects = Projects.slice(0, 4);
