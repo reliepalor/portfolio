@@ -76,7 +76,7 @@ export type ValidCategory =
   | "3D Modeling"
   | "API";
 
-export type ValidExpType = "Personal" | "Professional";
+export type ValidExpType = "Personal" | "Academics";
 
 export type ValidPages =
   | "home"

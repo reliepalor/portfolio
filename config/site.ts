@@ -11,7 +11,7 @@ export const siteConfig = {
     github: "https://github.com/reliepalor",
     linkedin: "https://www.linkedin.com/in/john-relie-palor-2053a3284/",
   },
-  ogImage: "/assets/image/profile-img.jpg",
+  ogImage: "",
   iconIco: "/assets/image/favicon.ico",
   logoIcon: "/assets/image/logo.png",
   keywords: [

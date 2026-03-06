@@ -31,7 +31,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "paw-haven",
     companyName: "Paw Haven - Pet Ecommerce",
-    type: "Professional",
+    type: "Academics",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "A Laravel and Tailwind-based pet eCommerce platform where users can browse and order pets, accessories, and food, complete with email order confirmations.",
@@ -75,7 +75,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "smart-lib",
     companyName: "Smart Lib: Digital Library Management",
-    type: "Professional",
+    type: "Academics",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "A Laravel-based library system with QR-based book borrowing/returning, real-time book availability, and study space tracking.",

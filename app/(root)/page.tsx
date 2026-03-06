@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { useState, useRef, useEffect } from "react";
 
 import { AnimatedSection } from "@/components/common/animated-section";
 import { AnimatedText } from "@/components/common/animated-text";
@@ -32,7 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default function IndexPage() {
-  // Structured data for personal portfolio
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -43,7 +41,6 @@ export default function IndexPage() {
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
 
-  // Structured data for website as a software application (template)
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -75,176 +72,223 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      {/* Revolutionary Hero Section */}
-      <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-gradient-to-br from-background via-background/95 to-muted/20">
-        {/* Floating geometric elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse" />
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-primary/40 rounded-full animate-pulse delay-1000" />
-          <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-primary/20 rounded-full animate-pulse delay-2000" />
-          <div className="absolute top-2/3 right-1/4 w-0.5 h-0.5 bg-primary/50 rounded-full animate-pulse delay-500" />
-        </div>
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden">
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 min-h-[calc(100vh-5rem)] flex items-start pt-6 sm:items-center sm:pt-0">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center w-full">
-            
-            {/* Left Column - Content */}
-            <div className="space-y-6 lg:space-y-12">
-              {/* Status Indicator */}
-              <AnimatedText delay={0.1}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium mt-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  studying...
-                </div>
+        {/* Very subtle grid texture */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+          }}
+        />
+
+        {/* Soft radial glow — bottom left */}
+        <div
+          className="absolute -bottom-32 -left-32 w-[480px] h-[480px] rounded-full pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle, hsl(var(--primary)/0.08) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+            {/* Left — Text */}
+            <div className="space-y-10">
+
+              {/* Availability badge */}
+              <AnimatedText delay={0.05}>
+                <span className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground tracking-widest uppercase">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                  studying
+                </span>
               </AnimatedText>
 
-              {/* Main Heading with Unique Typography */}
-              <div className="space-y-4">
-                <AnimatedText delay={0.2}>
-                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-light leading-[0.9] tracking-tight">
-                    <span className="block text-muted-foreground/60 text-lg font-mono mb-2">
-                    </span>
-                    <span className="block font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                      {siteConfig.authorName}
-                    </span>
-                    <span className="block text-muted-foreground/60 text-lg font-mono mt-2">
-                    </span>
-                  </h1>
-                </AnimatedText>
-                
-                <AnimatedText delay={0.4}>
-                  <div className="text-xl sm:text-2xl text-muted-foreground font-light">
-                    <span>Exploring the world of web</span>
-                    <br />
-                    <span className="text-black dark:text-gray-100">One pixel at a time</span>
-                  </div>
-                </AnimatedText>
-              </div>
+              {/* Name */}
+              <AnimatedText delay={0.15}>
+                <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-semibold leading-[1.0] tracking-[-0.03em] text-foreground">
+                  {siteConfig.authorName}
+                </h1>
+              </AnimatedText>
 
-              {/* Description with Modern Layout */}
-              <AnimatedText delay={0.6}>
-                <div className="relative pl-6">
-                  <div className="absolute left-0 top-2 w-0.5 h-16 bg-gradient-to-b from-primary to-transparent" />
-                  <p className="text-muted-foreground leading-relaxed max-w-md">
+              {/* Tagline */}
+              <AnimatedText delay={0.28}>
+                <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-sm">
+                  Exploring the world of web —{" "}
+                  <span className="text-foreground font-normal">one pixel at a time.</span>
+                </p>
+              </AnimatedText>
+
+              {/* Description with left rule */}
+              <AnimatedText delay={0.4}>
+                <div className="flex gap-5">
+                  <div className="w-px flex-shrink-0 self-stretch bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
+                  <p className="text-sm text-muted-foreground leading-[1.85] max-w-xs">
                     {siteConfig.description}
                   </p>
                 </div>
               </AnimatedText>
 
-              {/* Action Buttons with Unique Style */}
-              <AnimatedText delay={0.8}>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              {/* CTAs */}
+              <AnimatedText delay={0.52}>
+                <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href={siteConfig.links.github}
                     target="_blank"
-                    className="group relative overflow-hidden rounded-xl bg-foreground text-background px-6 sm:px-8 py-3 font-medium transition-all duration-300 hover:shadow-lg hover:shadow-foreground/25"
                     aria-label={`View ${siteConfig.authorName}'s GitHub profile`}
+                    className="group inline-flex items-center gap-2.5 rounded-xl bg-foreground text-background px-6 py-2.5 text-sm font-medium transition-all duration-200 hover:opacity-80 hover:shadow-xl hover:shadow-foreground/10 hover:-translate-y-px"
                   >
-                    <span className="relative z-10 flex items-center gap-2">
-                      <Icons.gitHub className="w-4 h-4 sm:w-5 sm:h-5" />
-                      Github
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/30 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                    <Icons.gitHub className="w-4 h-4" />
+                    GitHub
                   </Link>
 
                   <Link
                     href="/contact"
-                    className="group flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300"
                     aria-label={`Contact ${siteConfig.authorName}`}
+                    className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <span className="font-medium">Let's connect</span>
-                    <Icons.contact className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                    Let's connect
+                    <Icons.contact className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                   </Link>
                 </div>
               </AnimatedText>
 
-              {/* Minimalist Navigation Hint */}
-              <AnimatedText delay={1.0}>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground/60 font-mono">
-                  <div className="w-4 h-px bg-muted-foreground/30" />
-                  scroll to explore
-                </div>
-              </AnimatedText>
+              {/* Scroll hint */}
+              
             </div>
 
-            {/* Right Column - Visual Element */}
-            <RightVisual/>
+            {/* Right — Visual */}
+            <div className="hidden lg:flex justify-end">
+              <RightVisual />
+            </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <AnimatedText delay={1.2}>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
-              <Icons.chevronDown className="h-5 w-5 animate-bounce" />
-            </div>
+        {/* Scroll chevron */}
+        <AnimatedText delay={0.9}>
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <AnimatedText delay={0.65}>
+                <div className="flex items-center gap-3 text-[11px] font-mono text-muted-foreground/40 tracking-widest uppercase">
+                  <div className="text-gray-700 w-6 h-px bg-muted-foreground/20" />
+                  scroll to explore
+                </div>
+              </AnimatedText>
           </div>
         </AnimatedText>
       </section>
 
-      {/* Rest of the sections remain the same */}
+      {/* ── Skills ───────────────────────────────────────────────────────── */}
       <AnimatedSection
-        className="container space-y-6 bg-muted py-8 sm:py-10"
+        className="container space-y-8 py-16 sm:py-20"
         id="skills"
       >
-        <div className="mx-auto flex w-full max-w-[58rem] items-center justify-between gap-4">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.skills.title}
+        {/* Section label */}
+        <div className="mx-auto w-full max-w-[58rem]">
+          <AnimatedText>
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <p className="text-[11px] font-mono text-muted-foreground/50 tracking-widest uppercase">
+                  What I work with
+                </p>
+                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+                  {pagesConfig.skills.title}
+                </h2>
+              </div>
+              {skills.length >= 12 && (
+                <Link
+                  href="/skills"
+                  className="text-xs font-mono text-muted-foreground/50 hover:text-foreground transition-colors tracking-wider uppercase"
+                >
+                  View all →
+                </Link>
+              )}
+            </div>
+            {/* Section rule */}
+            <div className="mt-6 h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
           </AnimatedText>
-          {skills.length >= 12 && (
-            <Link
-              href="/skills"
-              className="text-sm font-medium text-foreground/80 hover:text-foreground"
-            >
-              View All
-            </Link>
-          )}
         </div>
+
         <SkillsCard skills={skills} compactMobile />
       </AnimatedSection>
 
+{/* ── Projects ──────────────────────────────────────────────────── */}
       <AnimatedSection
         direction="right"
-        className="container space-y-6 py-8 sm:py-10 my-8 sm:my-14"
+        className="py-16 sm:py-20 border-t border-border/30"
         id="projects"
       >
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <AnimatedText
-            as="h2"
-            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-          >
-            {pagesConfig.projects.title}
+        <div className="px-6 sm:px-12 lg:px-20">
+
+          {/* Header */}
+          <AnimatedText>
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-muted-foreground/40 mb-1">
+                  Selected work
+                </p>
+                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
+                  {pagesConfig.projects.title}
+                </h2>
+              </div>
+              <Link
+                href="/projects"
+                className="text-[11px] font-mono tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-200"
+              >
+                View all →
+              </Link>
+            </div>
+            <div className="h-px w-full bg-border/30 mb-10" />
           </AnimatedText>
-          <AnimatedText
-            as="p"
-            delay={0.2}
-            className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7"
-          >
-            {pagesConfig.projects.description}
-          </AnimatedText>
+
+          {/* Project grid — 2 cols, card style like reference */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {featuredProjects.map((project, index) => (
+              <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
+                <Link
+                  href={project.githubLink ?? project.websiteLink ?? `/projects/${project.id}`}
+                  target="_blank"
+                  className="group block rounded-2xl overflow-hidden border border-border/30 bg-muted/30 hover:border-border/60 transition-all duration-300"
+                >
+                  {/* Preview area — grey box with centered project name, like the reference screenshots */}
+                  <div className="relative aspect-[16/10] bg-muted/50 flex items-center justify-center overflow-hidden">
+                    <Image
+                      src={project.companyLogoImg}
+                      alt={`${project.companyName} preview`}
+                      fill
+                      className="object-cover opacity-90 transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/[0.02] transition-colors duration-300" />
+                  </div>
+
+                  {/* Card footer — title + tag */}
+                  <div className="flex items-center justify-between px-5 py-4 border-t border-border/20">
+                    <div>
+                      <p className="text-sm font-medium text-foreground leading-none mb-1">
+                        {project.companyName}
+                      </p>
+                      {project.techStack?.[0] && (
+                        <p className="text-[11px] text-muted-foreground/50 font-mono">
+                          {project.techStack[0]}
+                        </p>
+                      )}
+                    </div>
+                    <span className="text-muted-foreground/30 group-hover:text-muted-foreground text-sm transition-colors duration-200">
+                      ↗
+                    </span>
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+
         </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-          {featuredProjects.map((exp, index) => (
-            <AnimatedSection
-              key={exp.id}
-              delay={0.1 * (index + 1)}
-              direction="up"
-            >
-              <ProjectCard project={exp as any} />
-            </AnimatedSection>
-          ))}
-        </div>
-        <AnimatedText delay={0.4} className="flex justify-center">
-          <Link href="/projects">
-            <Button variant={"outline"} className="rounded-xl">
-              <Icons.chevronDown className="mr-2 h-4 w-4" /> View All
-            </Button>
-          </Link>
-        </AnimatedText>
       </AnimatedSection>
 
     </ClientPageWrapper>
