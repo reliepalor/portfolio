@@ -146,14 +146,7 @@ export default function IndexPage() {
                     GitHub
                   </Link>
 
-                  <Link
-                    href="/contact"
-                    aria-label={`Contact ${siteConfig.authorName}`}
-                    className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  >
-                  Let us connect
-                    <Icons.contact className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                  </Link>
+            
                 </div>
               </AnimatedText>
 
