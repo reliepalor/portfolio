@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Inter as FontSans } from "next/font/google";
+import { Raleway } from "next/font/google";
 import localFont from "next/font/local";
 
 import { ThemeProvider } from "@/components/common/theme-provider";
@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "../config/site";
 import { cn } from "@/lib/utils";
 
-const fontSans = FontSans({
+const fontSans = Raleway({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -91,12 +91,6 @@ export const metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className={cn(fontSans.variable, fontHeading.variable)}>
         <ThemeProvider
           attribute="class"

@@ -139,7 +139,7 @@ export default function IndexPage() {
                   <Link
                     href={siteConfig.links.github}
                     target="_blank"
-                    aria-label={`View ${siteConfig.authorName}'s GitHub profile`}
+                    aria-label={`View GitHub profile of ${siteConfig.authorName}`}
                     className="group inline-flex items-center gap-2.5 rounded-xl bg-foreground text-background px-6 py-2.5 text-sm font-medium transition-all duration-200 hover:opacity-80 hover:shadow-xl hover:shadow-foreground/10 hover:-translate-y-px"
                   >
                     <Icons.gitHub className="w-4 h-4" />
