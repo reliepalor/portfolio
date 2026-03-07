@@ -82,6 +82,15 @@ function ThemeToggleButton() {
 
 export function MainNav({ items, children }: MainNavProps) {
   const pathname = usePathname();
+  const navItems = React.useMemo(
+    () =>
+      items?.filter(
+        (item) =>
+          item.href !== "/skills" &&
+          String(item.title).trim().toLowerCase() !== "skills"
+      ) ?? [],
+    [items]
+  );
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const [scrolled, setScrolled] = React.useState<boolean>(false);
   const [isVisible, setIsVisible] = React.useState<boolean>(true);
@@ -101,7 +110,7 @@ export function MainNav({ items, children }: MainNavProps) {
   );
 
   const updatePillPosition = React.useCallback(() => {
-    const activeIndex = items?.findIndex((item) => isItemActive(item.href));
+    const activeIndex = navItems.findIndex((item) => isItemActive(item.href));
 
     if (typeof activeIndex === "number" && activeIndex >= 0) {
       const el = itemRefs.current[activeIndex];
@@ -110,7 +119,7 @@ export function MainNav({ items, children }: MainNavProps) {
         setPillStyle({ left: el.offsetLeft, width: el.offsetWidth });
       }
     }
-  }, [isItemActive, items]);
+  }, [isItemActive, navItems]);
 
   React.useEffect(() => {
     setShowMobileMenu(false);
@@ -190,7 +199,7 @@ export function MainNav({ items, children }: MainNavProps) {
           </Link>
         </motion.div>
 
-        {items?.length ? (
+        {navItems.length ? (
           <nav className="relative hidden items-center gap-1 md:flex">
             <motion.span
               layout
@@ -198,7 +207,7 @@ export function MainNav({ items, children }: MainNavProps) {
               style={pillStyle}
               transition={{ type: "spring", stiffness: 380, damping: 32 }}
             />
-            {items.map((item, index) => (
+            {navItems.map((item, index) => (
               <motion.div
                 key={index}
                 custom={index}
@@ -256,7 +265,7 @@ export function MainNav({ items, children }: MainNavProps) {
       </motion.div>
 
       <AnimatePresence>
-        {showMobileMenu && items && (
+        {showMobileMenu && navItems.length > 0 && (
           <motion.div
             key="mobile-dropdown"
             initial={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -266,7 +275,7 @@ export function MainNav({ items, children }: MainNavProps) {
             className="w-full max-w-3xl overflow-hidden rounded-2xl border border-border/70 bg-background/90 shadow-lg backdrop-blur-xl md:hidden"
           >
             <div className="p-2">
-              {items.map((item, index) => {
+              {navItems.map((item, index) => {
                 const isActive = isItemActive(item.href);
 
                 return (
