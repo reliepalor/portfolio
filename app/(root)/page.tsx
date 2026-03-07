@@ -149,8 +149,6 @@ export default function IndexPage() {
             
                 </div>
               </AnimatedText>
-
-              {/* Scroll hint */}
               
             </div>
 
