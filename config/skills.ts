@@ -8,26 +8,13 @@ export interface skillsInterface {
 }
 
 export const skillsUnsorted: skillsInterface[] = [
+
   {
-    name: "HTML 5",
-    description:
-      "Structure web content beautifully with the latest version of HyperText Markup Language.",
-    rating: 5,
-    icon: Icons.html5,
-  },
-  {
-    name: "CSS 3",
-    description:
-      "Style web pages creatively with the latest iteration of Cascading Style Sheets.",
-    rating: 5,
-    icon: Icons.css3,
-  },
-  {
-    name: "JavaScript",
+    name: "Typescript",
     description:
       "Create interactive and dynamic web experiences with the versatile scripting language.",
     rating: 5,
-    icon: Icons.javascript,
+    icon: Icons.typescript,
   },
   {
     name: "React",
@@ -35,6 +22,12 @@ export const skillsUnsorted: skillsInterface[] = [
       "Craft interactive user interfaces using components, state, props, and virtual DOM.",
     rating: 5,
     icon: Icons.react,
+  },
+  {
+    name: "Angular",
+    description: "",
+    rating: 5,
+    icon: Icons.angular,
   },
   {
     name: "Tailwind CSS",
@@ -58,15 +51,9 @@ export const skillsUnsorted: skillsInterface[] = [
     rating: 5,
     icon: Icons.laravel,
   },
+
   {
-    name: "C#",
-    description:
-      "Versatile programming language for backend, desktop, and cross-platform apps.",
-    rating: 5,
-    icon: Icons.csharp,
-  },
-  {
-    name: ".NET MAUI",
+    name: ".NET",
     description:
       "Cross-platform framework for building native desktop and mobile apps using .NET.",
     rating: 5,
@@ -88,11 +75,18 @@ export const skillsUnsorted: skillsInterface[] = [
   },
   
     {
-    name: "Git & GitHub",
+    name: "Git",
     description:
       "Version control system and platform for managing code repositories and collaboration.",
     rating: 4,
     icon: Icons.gitHub,
+  },
+      {
+    name: "Postman",
+    description:
+      "Version control system and platform for managing code repositories and collaboration.",
+    rating: 4,
+    icon: Icons.post,
   },
 
 ];

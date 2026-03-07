@@ -59,12 +59,12 @@ const LeftVisual = () => {
               <div className="space-y-4">
                 <AnimatedText delay={0.2}>
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-light leading-[0.9] tracking-tight">
-                    <span className="block text-muted-foreground/60 text-lg font-mono mb-2">
+                    <span className="block text-muted-foreground/60 text-lg font-sans mb-2">
                     </span>
                     <span className="block font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                       {siteConfig.authorName}
                     </span>
-                    <span className="block text-muted-foreground/60 text-lg font-mono mt-2">
+                    <span className="block text-muted-foreground/60 text-lg font-sans mt-2">
                     </span>
                   </h1>
                 </AnimatedText>
@@ -118,7 +118,7 @@ const LeftVisual = () => {
 
               {/* Minimalist Navigation Hint */}
               <AnimatedText delay={1.0}>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground/60 font-mono">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground/60 font-sans">
                   <div className="w-4 h-px bg-muted-foreground/30" />
                   scroll to explore
                 </div>

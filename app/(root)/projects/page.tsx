@@ -16,7 +16,7 @@ const renderContent = (tabVal: string) => {
   if (tabVal === "personal") {
     projectArr = projectArr.filter((val) => val.type === "Personal");
   } else if (tabVal === "professional") {
-    projectArr = projectArr.filter((val) => val.type === "Professional");
+    projectArr = projectArr.filter((val) => val.type === "Academics");
   }
 
   return (

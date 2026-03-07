@@ -55,8 +55,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-        heading: ["var(--font-heading)", ...fontFamily.sans],
-        raleway: ['Raleway', 'sans-serif'],
+        heading: ["var(--font-sans)", ...fontFamily.sans],
+        raleway: ["var(--font-sans)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",

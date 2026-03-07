@@ -1,4 +1,3 @@
-import { Norican } from "next/font/google";
 import Link from "next/link";
 import * as React from "react";
 
@@ -10,13 +9,6 @@ interface MobileNavProps {
   items: any[];
   children?: React.ReactNode;
 }
-
-const norican = Norican({
-  weight: ["400"],
-  style: ["normal"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export function MobileNav({ items, children }: MobileNavProps) {
   useLockBody();

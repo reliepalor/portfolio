@@ -72,141 +72,80 @@ export default function IndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden">
+    {/* ── Hero ─────────────────────────────────────────────────────────── */}
+    <section className="bg-muted/20 overflow-x-clip">
+      <div className="mx-auto grid w-full max-w-[1760px] gap-10 px-4 py-14 sm:px-5 md:px-6 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 lg:py-20">
 
-        {/* Very subtle grid texture */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-          }}
-        />
+        {/* Left — Text */}
+        <div className="flex max-w-[31rem] flex-col pt-0 lg:justify-self-start lg:pt-2">
 
-        {/* Soft radial glow — bottom left */}
-        <div
-          className="absolute -bottom-32 -left-32 w-[480px] h-[480px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, hsl(var(--primary)/0.08) 0%, transparent 70%)",
-          }}
-        />
-
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-            {/* Left — Text */}
-            <div className="space-y-10">
-
-              {/* Availability badge */}
-              <AnimatedText delay={0.05}>
-                <span className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground tracking-widest uppercase">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                  studying
-                </span>
-              </AnimatedText>
-
-              {/* Name */}
-              <AnimatedText delay={0.15}>
-                <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-semibold leading-[1.0] tracking-[-0.03em] text-foreground">
-                  {siteConfig.authorName}
-                </h1>
-              </AnimatedText>
-
-              {/* Tagline */}
-              <AnimatedText delay={0.28}>
-                <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-sm">
-                  Exploring the world of web —{" "}
-                  <span className="text-foreground font-normal">one pixel at a time.</span>
-                </p>
-              </AnimatedText>
-
-              {/* Description with left rule */}
-              <AnimatedText delay={0.4}>
-                <div className="flex gap-5">
-                  <div className="w-px flex-shrink-0 self-stretch bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
-                  <p className="text-sm text-muted-foreground leading-[1.85] max-w-xs">
-                    {siteConfig.description}
-                  </p>
-                </div>
-              </AnimatedText>
-
-              {/* CTAs */}
-              <AnimatedText delay={0.52}>
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link
-                    href={siteConfig.links.github}
-                    target="_blank"
-                    aria-label={`View GitHub profile of ${siteConfig.authorName}`}
-                    className="group inline-flex items-center gap-2.5 rounded-xl bg-foreground text-background px-6 py-2.5 text-sm font-medium transition-all duration-200 hover:opacity-80 hover:shadow-xl hover:shadow-foreground/10 hover:-translate-y-px"
-                  >
-                    <Icons.gitHub className="w-4 h-4" />
-                    GitHub
-                  </Link>
-
-            
-                </div>
-              </AnimatedText>
-              
-            </div>
-
-            {/* Right — Visual */}
-            <div className="hidden lg:flex justify-end">
-              <RightVisual />
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll chevron */}
-        <AnimatedText delay={0.9}>
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <AnimatedText delay={0.65}>
-                <div className="flex items-center gap-3 text-[11px] font-mono text-muted-foreground/40 tracking-widest uppercase">
-                  <div className="text-gray-700 w-6 h-px bg-muted-foreground/20" />
-                  scroll to explore
-                </div>
-              </AnimatedText>
-          </div>
-        </AnimatedText>
-      </section>
-
-      {/* ── Skills ───────────────────────────────────────────────────────── */}
-      <AnimatedSection
-        className="container space-y-8 py-16 sm:py-20"
-        id="skills"
-      >
-        {/* Section label */}
-        <div className="mx-auto w-full max-w-[58rem]">
-          <AnimatedText>
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <p className="text-[11px] font-mono text-muted-foreground/50 tracking-widest uppercase">
-                  What I work with
-                </p>
-                <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
-                  {pagesConfig.skills.title}
-                </h2>
-              </div>
-              {skills.length >= 12 && (
-                <Link
-                  href="/skills"
-                  className="text-xs font-mono text-muted-foreground/50 hover:text-foreground transition-colors tracking-wider uppercase"
-                >
-                  View all →
-                </Link>
-              )}
-            </div>
-            {/* Section rule */}
-            <div className="mt-6 h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
+          {/* Heading */}
+          <AnimatedText delay={0.05}>
+            <h1 className="text-4xl sm:text-2xl lg:text-[3rem] font-normal tracking-[-0.03em] text-foreground leading-[0.98]">
+              About me
+            </h1>
           </AnimatedText>
+
+          <AnimatedText delay={0.12}>
+            <p className="mt-4 text-2xl sm:text-md lg:text-[1.10rem] font-normal text-foreground">
+              I create premium templates for creatives.
+            </p>
+          </AnimatedText>
+
+          {/* Description */}
+          <AnimatedText delay={0.2}>
+            <p className="mt-16 max-w-[34rem] text-[1.05rem] leading-[1.6] text-foreground [overflow-wrap:anywhere] break-words lg:mt-20">
+              {siteConfig.description}
+            </p>
+          </AnimatedText>
+
         </div>
 
-        <SkillsCard skills={skills} compactMobile />
-      </AnimatedSection>
+        {/* Right — Image only */}
+        <div className="lg:mt-24 flex justify-center lg:justify-self-end lg:justify-end lg:pt-6">
+          <div className="w-full max-w-[500px]">
+            <RightVisual />
+          </div>
+        </div>
 
-{/* ── Projects ──────────────────────────────────────────────────── */}
+      </div>
+    </section>
+
+  {/* ── Skills ───────────────────────────────────────────────────────── */}
+  <AnimatedSection
+    className="mx-auto grid w-full max-w-[1760px] gap-10 px-4 py-16 sm:px-5 md:px-6 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 sm:py-20"
+    id="skills"
+  >
+    {/* Section label */}
+    <div className="w-full lg:pt-1">
+      <AnimatedText>
+        <div className="flex items-center justify-between">
+          <div className="space-y-1">
+            <p className="text-[11px] font-sans text-muted-foreground/50 tracking-widest uppercase">
+              What I work with
+            </p>
+            <h2 className="mt-2 text-4xl sm:text-5xl font-normal tracking-tight">
+              Skills
+            </h2>
+          </div>
+          {skills.length >= 12 && (
+            <Link
+              href="/skills"
+              className="text-xs font-sans text-muted-foreground/50 hover:text-foreground transition-colors tracking-wider uppercase"
+            >
+              View all →
+            </Link>
+          )}
+        </div>
+      </AnimatedText>
+    </div>
+
+    <AnimatedText className="w-full lg:justify-self-end lg:max-w-[500px]">
+      <SkillsCard skills={skills} compactMobile />
+    </AnimatedText>
+  </AnimatedSection>
+
+      {/* ── Projects ──────────────────────────────────────────────────── */}
       <AnimatedSection
         direction="right"
         className="py-16 sm:py-20 border-t border-border/30"
@@ -218,7 +157,7 @@ export default function IndexPage() {
           <AnimatedText>
             <div className="flex items-end justify-between mb-10">
               <div>
-                <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-muted-foreground/40 mb-1">
+                <p className="text-[10px] font-sans tracking-[0.2em] uppercase text-muted-foreground/40 mb-1">
                   Selected work
                 </p>
                 <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
@@ -227,7 +166,7 @@ export default function IndexPage() {
               </div>
               <Link
                 href="/projects"
-                className="text-[11px] font-mono tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-200"
+                className="text-[11px] font-sans tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-200"
               >
                 View all →
               </Link>
@@ -265,7 +204,7 @@ export default function IndexPage() {
                         {project.companyName}
                       </p>
                       {project.techStack?.[0] && (
-                        <p className="text-[11px] text-muted-foreground/50 font-mono">
+                        <p className="text-[11px] text-muted-foreground/50 font-sans">
                           {project.techStack[0]}
                         </p>
                       )}

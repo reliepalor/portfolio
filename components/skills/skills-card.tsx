@@ -6,109 +6,130 @@ interface SkillsCardProps {
 }
 
 const getHoverColorClass = (skillName: string) => {
-  if (skillName === "HTML 5") return "hover:text-[#E34F26]";
-  if (skillName === "CSS 3") return "hover:text-[#1572B6]";
-  if (skillName === "JavaScript") return "hover:text-[#F7DF1E]";
-  if (skillName === "React") return "hover:text-[#61DAFB]";
-  if (skillName === "Tailwind CSS") return "hover:text-[#06B6D4]";
-  if (skillName === "PHP") return "hover:text-[#777BB4]";
-  if (skillName === "Laravel") return "hover:text-[#FF2D20]";
-  if (skillName === "C#") return "hover:text-[#239120]";
-  if (skillName === ".NET MAUI") return "hover:text-[#512BD4]";
-  if (skillName === "MySQL") return "hover:text-[#4479A1]";
-  if (skillName === "Firebase") return "hover:text-[#FFCA28]";
-  if (skillName === "Git & GitHub") return "hover:text-[#535353]";
-  if (skillName === "Vercel") return "hover:text-[#4c4c4c]";
+  const normalized = skillName.trim().toLowerCase();
+
+  if (normalized === "html 5") return "hover:text-[#E34F26]";
+  if (normalized === "css 3") return "hover:text-[#1572B6]";
+  if (normalized === "typescript") return "hover:text-[#F7DF1E]";
+  if (normalized === "react") return "hover:text-[#61DAFB]";
+  if (normalized === "angular") return "hover:text-[#DD0031]";
+  if (normalized === "tailwind css") return "hover:text-[#06B6D4]";
+  if (normalized === "php") return "hover:text-[#777BB4]";
+  if (normalized === "laravel") return "hover:text-[#FF2D20]";
+  if (normalized === ".net maui" || normalized === ".net")
+    return "hover:text-[#512BD4]";
+  if (normalized === "mysql") return "hover:text-[#4479A1]";
+  if (normalized === "firebase") return "hover:text-[#FFCA28]";
+  if (normalized === "git & github" || normalized === "git")
+    return "hover:text-[#535353]";
+  if (normalized === "postman") return "hover:text-[#FF2D20]";
+  if (normalized === "vercel") return "hover:text-[#4c4c4c]";
   return "hover:text-primary";
 };
 
-const getMobileGroupLabel = (skillName: string) => {
-  const frontend = new Set([
-    "HTML 5",
-    "CSS 3",
-    "JavaScript",
-    "React",
-    "Tailwind CSS",
-  ]);
-  const backend = new Set(["PHP", "Laravel", "C#", "MySQL", "Firebase"]);
-  const devTools = new Set([".NET MAUI", "Git & GitHub", "Vercel"]);
+const getGroupLabel = (skillName: string) => {
+  const normalized = skillName.trim().toLowerCase();
 
-  if (frontend.has(skillName)) return "Frontend";
-  if (backend.has(skillName)) return "Backend";
-  if (devTools.has(skillName)) return "DevOps & Cloud";
+  const frontend = new Set(["html 5", "css 3", "typescript", "react", "angular", "tailwind css"]);
+  const backend = new Set(["php", "laravel", ".net", "mysql", "firebase"]);
+  const devTools = new Set([ "git & github", "git", "vercel","postman"]);
+
+  if (frontend.has(normalized)) return "Frontend";
+  if (backend.has(normalized)) return "Backend";
+  if (devTools.has(normalized)) return "DevOps & Cloud";
   return "Others";
 };
 
-export default function SkillsCard({
-  skills,
-  compactMobile = false,
-}: SkillsCardProps) {
-  if (compactMobile) {
-    const groupOrder = ["Frontend", "Backend", "DevOps & Cloud", "Others"];
-    const groupedSkills = groupOrder
-      .map((label) => ({
-        label,
-        items: skills.filter((skill) => getMobileGroupLabel(skill.name) === label),
-      }))
-      .filter((group) => group.items.length > 0);
+const groupOrder = ["Frontend", "Backend", "DevOps & Cloud", "Others"];
 
-    return (
-      <div className="space-y-6">
-        <div className="sm:hidden space-y-5">
-          {groupedSkills.map((group) => (
-            <div key={group.label} className="space-y-2">
-              <h3 className="text-sm font-semibold text-center">{group.label}</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {group.items.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className={`inline-flex h-9 w-full items-center justify-center gap-2 rounded-md border bg-background px-3 text-xs font-medium ${getHoverColorClass(skill.name)}`}
-                  >
-                    <skill.icon className="h-4 w-4 shrink-0" />
-                    <span className="whitespace-nowrap">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+export default function SkillsCard({ skills, compactMobile = false }: SkillsCardProps) {
+  const groupedSkills = groupOrder
+    .map((label) => ({
+      label,
+      items: skills.filter((skill) => getGroupLabel(skill.name) === label),
+    }))
+    .filter((group) => group.items.length > 0);
 
-        <div className="hidden sm:grid grid-cols-3 md:grid-cols-4 gap-4">
-          {skills.map((skill) => (
-            <div
-              key={skill.name}
-              className="relative overflow-hidden rounded-lg border bg-background font-raleway p-1 transition-all duration-300 hover:shadow-md"
-            >
-              <div
-                className={`flex h-[120px] flex-col items-center justify-center rounded-md p-4 transition-all duration-300 ${getHoverColorClass(skill.name)}`}
+  /* ── Mobile: grouped rows ── */
+  const mobileView = (
+    <div className="sm:hidden space-y-6">
+      {groupedSkills.map((group) => (
+        <div key={group.label}>
+          {/* divider + label */}
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-[11px] tracking-widest uppercase text-muted-foreground/50 font-sans whitespace-nowrap">
+              {group.label}
+            </span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+            {group.items.map((skill) => (
+              <button
+                key={skill.name}
+                className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 ${getHoverColorClass(skill.name)}`}
               >
-                <skill.icon className="h-[30px] w-[30px] transition-all duration-300" />
-                <h3 className="mt-2 text-sm font-medium text-center transition-colors duration-300">
-                  {skill.name}
-                </h3>
-              </div>
-            </div>
-          ))}
+                <skill.icon className="h-4 w-4 shrink-0" />
+                <span>{skill.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
+    </div>
+  );
+
+  /* ── Desktop: two-column FAQ-style layout ── */
+  const desktopView = (
+    <div className="hidden sm:block w-full">
+      {groupedSkills.map((group) => (
+        <div key={group.label}>
+          {/* top divider */}
+          <div className="h-px bg-border" />
+          <div className="py-5">
+            <span className="text-xs tracking-widest uppercase text-muted-foreground/40 font-sans">
+              {group.label}
+            </span>
+            <div className="mt-3 flex flex-wrap gap-x-8 gap-y-3">
+              {group.items.map((skill) => (
+                <div
+                  key={skill.name}
+                  className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
+                >
+                  <skill.icon className="h-4 w-4 shrink-0" />
+                  <span>{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+      {/* bottom divider */}
+      <div className="h-px bg-border" />
+    </div>
+  );
+
+  if (compactMobile) {
+    return (
+      <>
+        {mobileView}
+        {desktopView}
+      </>
     );
   }
 
+  /* fallback: flat list */
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    <div className="w-full">
+      <div className="h-px bg-border" />
       {skills.map((skill) => (
-        <div
-          key={skill.name}
-          className="relative overflow-hidden rounded-lg border bg-background font-raleway p-1 transition-all duration-300 hover:shadow-md"
-        >
+        <div key={skill.name}>
           <div
-            className={`flex h-[120px] flex-col items-center justify-center rounded-md p-4 transition-all duration-300 ${getHoverColorClass(skill.name)}`}
+            className={`flex items-center gap-3 py-4 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
           >
-            <skill.icon className="h-[30px] w-[30px] transition-all duration-300" />
-            <h3 className="mt-2 text-sm font-medium text-center transition-colors duration-300">
-              {skill.name}
-            </h3>
+            <skill.icon className="h-4 w-4 shrink-0 ml-[11.5rem]" />
+            <span>{skill.name}</span>
           </div>
+          <div className="h-px bg-border" />
         </div>
       ))}
     </div>
