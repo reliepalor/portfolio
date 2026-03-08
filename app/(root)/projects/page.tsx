@@ -1,7 +1,9 @@
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
+import { AnimatedSection } from "@/components/common/animated-section";
 import PageContainer from "@/components/common/page-container";
-import ProjectCard from "@/components/projects/project-card";
 import { ResponsiveTabs } from "@/components/ui/responsive-tabs";
 import { pagesConfig } from "../../../config/pages";
 import { Projects } from "../../../config/projects";
@@ -20,10 +22,38 @@ const renderContent = (tabVal: string) => {
   }
 
   return (
-    <div className="mx-auto my-4 grid justify-center gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 static">
-      {projectArr.map((project) => (
-        <ProjectCard project={project as any} key={project.id} />
-      ))}
+    <div className="mx-auto my-5 w-full max-w-[1500px] px-2 sm:px-4 lg:px-6">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6">
+        {projectArr.map((project, index) => (
+          <AnimatedSection key={project.id} delay={0.08 * (index + 1)} direction="up">
+            <Link
+              href={project.githubLink ?? project.websiteLink ?? `/projects/${project.id}`}
+              className="group block transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
+                <div className="relative h-[72%] w-[70%]">
+                  <Image
+                    src={project.companyLogoImg}
+                    alt={`${project.companyName} preview`}
+                    fill
+                    className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
+              </div>
+
+              <div className="px-0 py-3.5">
+                <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
+                  {project.companyName}
+                </p>
+                <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
+                  {project.type}
+                </p>
+              </div>
+            </Link>
+          </AnimatedSection>
+        ))}
+      </div>
     </div>
   );
 };

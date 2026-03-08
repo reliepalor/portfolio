@@ -213,37 +213,41 @@ export const Projects: ProjectInterface[] = [
   ],
   startDate: "2025-12-01",
   endDate: "2026-01-20",
-  companyLogoImg: "/projects/videogames/user-dashboard.png",
+  companyLogoImg: "/projects/videogames/images/op-landingpage.png",
   pagesInfoArr: [
     {
       title: "User Welcome Page",
       description:
         "Users can view the Welcome Page with some videogames graphics.",
-      imgArr: ["/projects/videogames/user-dashboard.png"],
+      imgArr: ["/projects/videogames/images/op-landingpage.png"],
     },
     {
-      title: "Games List",
+      title: "Games",
       description:
         "Users can view the available games.",
-      imgArr: ["/projects/videogames/user-games.png"],
+      imgArr: ["/projects/videogames/images/op-games.png"],
+    },
+    {
+      title: "Digital Products",
+      description: "Users can view the available digital products.",
+      imgArr: ["/projects/videogames/images/op-software.png"]
     },
     {
       title: "Order History",
       description:
         "Users can see their order history weather its Pending, Approved, or Rejected.",
-      imgArr: ["/projects/videogames/user-myorders.png"],
+      imgArr: ["/projects/videogames/images/op-orders.png"],
     },
     {
       title: "Carts",
       description: "Users can view their carts.",
-      imgArr: ["/projects/videogames/user-cart.png "],
+      imgArr: ["/projects/videogames/images/op-cart.png"],
     }
   ],
   descriptionDetails: {
     paragraphs: [
       "This project is a full-stack video game e-commerce system built with a strong focus on real-world business logic and clean API design. It supports user authentication, cart handling, order checkout, and an admin-controlled approval workflow.",
-      "Orders require admin approval before users receive system-generated product keys, simulating real digital product delivery. The platform also includes analytics dashboards and a verified reviews & ratings system.",
-      "The frontend is built with Angular and styled using Tailwind CSS, emphasizing clean UI, usability, and responsive design."
+      
     ],
     bullets: [
       "Implemented cart functionality with item selection, filtering, quantity updates, and subtotal calculations.",

@@ -74,7 +74,7 @@ export default function IndexPage() {
 
     {/* ── Hero ─────────────────────────────────────────────────────────── */}
     <section className="bg-muted/20 overflow-x-clip">
-      <div className="mx-auto grid w-full max-w-[1760px] gap-10 px-4 py-14 sm:px-5 md:px-6 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 lg:py-20">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-8 py-14 sm:px-8 md:px-10 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 lg:py-20">
 
         {/* Left — Text */}
         <div className="flex max-w-[31rem] flex-col pt-0 lg:justify-self-start lg:pt-2">
@@ -151,7 +151,7 @@ export default function IndexPage() {
         className="py-16 sm:py-20 border-t border-border/30"
         id="projects"
       >
-        <div className="px-6 sm:px-12 lg:px-20">
+        <div className="mx-auto w-full max-w-[1920px] px-3 sm:px-5 lg:px-6">
 
           {/* Header */}
           <AnimatedText>
@@ -174,42 +174,40 @@ export default function IndexPage() {
             <div className="h-px w-full bg-border/30 mb-10" />
           </AnimatedText>
 
-          {/* Project grid — 2 cols, card style like reference */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Project grid — 2 cols, large preview cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
             {featuredProjects.map((project, index) => (
               <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
                 <Link
                   href={project.githubLink ?? project.websiteLink ?? `/projects/${project.id}`}
-                  target="_blank"
-                  className="group block rounded-2xl overflow-hidden border border-border/30 bg-muted/30 hover:border-border/60 transition-all duration-300"
+                  className="group block transition-transform duration-200 hover:-translate-y-0.5"
                 >
-                  {/* Preview area — grey box with centered project name, like the reference screenshots */}
-                  <div className="relative aspect-[16/10] bg-muted/50 flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={project.companyLogoImg}
-                      alt={`${project.companyName} preview`}
-                      fill
-                      className="object-cover opacity-90 transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
+                  {/* Preview area */}
+                  <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
+                    <div className="relative h-[72%] w-[70%]">
+                      <Image
+                        src={project.companyLogoImg}
+                        alt={`${project.companyName} preview`}
+                        fill
+                        className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </div>
 
 
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/[0.02] transition-colors duration-300" />
+                    <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
                   </div>
 
                   {/* Card footer — title + tag */}
-                  <div className="flex items-center justify-between px-5 py-4 border-t border-border/20">
+                  <div className="px-0 py-3.5">
                     <div>
-                      <p className="text-sm font-medium text-foreground leading-none mb-1">
+                      <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
                         {project.companyName}
                       </p>
-                      {project.techStack?.[0] && (
-                        <p className="text-[11px] text-muted-foreground/50 font-sans">
-                          {project.techStack[0]}
-                        </p>
-                      )}
+                      <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
+                        {project.type}
+                      </p>
                     </div>
-                    <span className="text-muted-foreground/30 group-hover:text-muted-foreground text-sm transition-colors duration-200">
+                    <span className="hidden">
                       ↗
                     </span>
                   </div>

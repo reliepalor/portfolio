@@ -26,7 +26,7 @@ interface AboutData {
 const aboutData: AboutData = {
   fullName: "John Relie Palor",
   description:
-    "I&apos;m a 4th year student learning web development with a passion for creating modern, responsive websites and applications.",
+    "I'm a 4th year student learning web development with a passion for creating modern, responsive websites and applications.",
   education: {
     degree: "Bachelor of Science in Information Technology",
     school: "Cagayan State University",
@@ -63,7 +63,7 @@ export default function AboutPage() {
           {/* Header */}
           <div className="space-y-4">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              About Me
+              
             </h1>
             <p className="text-lg text-muted-foreground">
               {aboutData.description}
@@ -107,7 +107,7 @@ export default function AboutPage() {
           </div>
 
           {/* Personal Note */}
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <h2 className="text-2xl font-bold">A Note From Me</h2>
             <div className="rounded-lg border p-6">
               <p className="text-muted-foreground">
@@ -117,7 +117,7 @@ export default function AboutPage() {
                 a positive impact.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
