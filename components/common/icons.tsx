@@ -16,6 +16,7 @@ import {
   Loader2,
   LucideProps,
   Menu,
+  Play,
   Moon,
   MoreVertical,
   Music,
@@ -137,6 +138,7 @@ csharp: SiCsharp,
   twitter: SiTwitter,
   linkedin: SiLinkedin,
   userFill: BiSolidUser,
+  play: Play,
   work: HiBriefcase,
   gitHub: ({ ...props }: LucideProps) => (
     <svg

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Icons } from "../../../../components/common/icons";
-import ProjectDescription from "@/components/projects/project-description";
+import ProjectModeContent from "@/components/projects/project-mode-content";
 import { buttonVariants } from "@/components/ui/button";
 import ChipContainer from "@/components/ui/chip-container";
 import CustomTooltip from "@/components/ui/custom-tooltip";
@@ -18,8 +18,6 @@ interface ProjectPageProps {
   };
 }
 
-const githubUsername = siteConfig.username;
-
 export default function Project({ params }: ProjectPageProps) {
   let project = Projects.find((val) => val.id === params.projectId);
   if (!project) {
@@ -27,48 +25,62 @@ export default function Project({ params }: ProjectPageProps) {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
-      <Link
-        href="/projects"
-        className={cn(
-          buttonVariants({ variant: "ghost" }),
-          "absolute left-[-200px] top-14 hidden xl:inline-flex"
-        )}
-      >
-        <Icons.chevronLeft className="mr-2 h-4 w-4" />
-        All Projects
-      </Link>
-      <div>
-        <time
-          dateTime={Date.now().toString()}
-          className="block text-sm text-muted-foreground"
+    <article className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
+      <div className="mb-6 sm:mb-8">
+        <Link
+          href="/projects"
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "w-fit"
+          )}
         >
-          {formatDateFromObj(new Date(project.startDate))}
-        </time>
-        <h1 className="flex items-center justify-between mt-2 font-heading text-4xl leading-tight lg:text-5xl">
-          {project.companyName}
-          <div className="flex items-center">
-            {project.githubLink && (
-              <CustomTooltip text="Link to the source code.">
-                <Link href={project.githubLink} target="_blank">
-                  <Icons.gitHub className="w-6 ml-4 text-muted-foreground hover:text-foreground" />
-                </Link>
-              </CustomTooltip>
-            )}
-            {project.websiteLink && (
-              <CustomTooltip text="Please note that some project links may be temporarily unavailable.">
-                <Link href={project.websiteLink} target="_blank">
-                  <Icons.externalLink className="w-6 ml-4 text-muted-foreground hover:text-foreground " />
-                </Link>
-              </CustomTooltip>
-            )}
+          <Icons.chevronLeft className="mr-2 h-4 w-4" />
+          All Projects
+        </Link>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_280px] lg:gap-10">
+        <section className="space-y-6 rounded-2xl border border-border/60 bg-background/60 p-5 sm:p-7 lg:p-8">
+          <time
+            dateTime={Date.now().toString()}
+            className="block text-sm text-muted-foreground"
+          >
+            {formatDateFromObj(new Date(project.startDate))}
+          </time>
+
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h1 className="max-w-3xl font-heading text-3xl leading-tight sm:text-4xl lg:text-5xl">
+              {project.companyName}
+            </h1>
+
+            <div className="flex items-center gap-3">
+              {project.githubLink && (
+                <CustomTooltip text="Link to the source code.">
+                  <Link href={project.githubLink} target="_blank" className="rounded-md border border-border/60 p-2 text-muted-foreground transition-colors hover:text-foreground">
+                    <Icons.gitHub className="h-5 w-5" />
+                  </Link>
+                </CustomTooltip>
+              )}
+              {project.websiteLink && (
+                <CustomTooltip text="Please note that some project links may be temporarily unavailable.">
+                  <Link href={project.websiteLink} target="_blank" className="rounded-md border border-border/60 p-2 text-muted-foreground transition-colors hover:text-foreground">
+                    <Icons.externalLink className="h-5 w-5" />
+                  </Link>
+                </CustomTooltip>
+              )}
+            </div>
           </div>
-        </h1>
-        <ChipContainer textArr={project.category} />
-        <div className="mt-4 flex space-x-4">
+
+          <ChipContainer textArr={project.category} />
+        </section>
+
+        <aside className="rounded-2xl border border-border/60 bg-muted/20 p-5 sm:p-6 lg:sticky lg:top-24 lg:h-fit">
+          <p className="mb-3 text-xs uppercase tracking-wider text-muted-foreground">
+            Project Author
+          </p>
           <Link
             href={siteConfig.links.github}
-            className="flex items-center space-x-2 text-sm"
+            className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/70 p-3 text-sm"
           >
             <Image
               src={profileImg}
@@ -85,65 +97,21 @@ export default function Project({ params }: ProjectPageProps) {
               </p>
             </div>
           </Link>
-        </div>
+        </aside>
       </div>
 
-      <Image
-        src={project.companyLogoImg}
-        alt={project.companyName}
-        width={720}
-        height={405}
-        className="my-8 rounded-md border bg-muted transition-colors"
-        priority
-      />
-
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
+      <section className="mt-8 space-y-6 rounded-2xl border border-border/60 bg-background/60 p-5 sm:mt-10 sm:p-7 lg:p-8">
+        <h2 className="font-heading text-2xl leading-tight sm:text-3xl">
           Tech Stack
         </h2>
         <ChipContainer textArr={project.techStack} />
-      </div>
+      </section>
 
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
-          Description
-        </h2>
-        {/* {<project.descriptionComponent />} */}
-        <ProjectDescription
-          paragraphs={project.descriptionDetails.paragraphs}
-          bullets={project.descriptionDetails.bullets}
-        />
-      </div>
+      <section className="mt-8 rounded-2xl border border-border/60 bg-background/60 p-5 sm:mt-10 sm:p-7 lg:p-8">
+        <ProjectModeContent project={project} />
+      </section>
 
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          Page Info
-        </h2>
-        {project.pagesInfoArr.map((page, ind) => (
-          <div key={ind}>
-            <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
-              <Icons.star className="h-5 w-5 mr-2" /> {page.title}
-            </h3>
-            <div>
-              <p>{page.description}</p>
-              {page.imgArr.map((img, ind) => (
-                <Image
-                  src={img}
-                  key={ind}
-                  alt={img}
-                  width={720}
-                  height={405}
-                  className="my-4 rounded-md border bg-muted transition-colors"
-                  priority
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <hr className="mt-12" />
-      <div className="flex justify-center py-6 lg:py-10">
+      <div className="mt-10 flex justify-center border-t border-border/50 pt-8 sm:mt-12 sm:pt-10">
         <Link
           href="/projects"
           className={cn(buttonVariants({ variant: "ghost" }))}

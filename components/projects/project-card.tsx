@@ -19,6 +19,7 @@ type ProjectCardProps = {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const hasPrimaryLink = Boolean(project.websiteLink || project.githubLink);
   const primaryLink = project.websiteLink || project.githubLink || `/projects/${project.id}`;
+  const hasAdminPreview = Boolean(project.adminPreview);
 
   return (
     <motion.article
@@ -56,6 +57,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <h3 className="line-clamp-2 text-base font-semibold leading-tight text-foreground sm:text-lg lg:text-xl">
             {project.companyName}
           </h3>
+          {hasAdminPreview && (
+            <p className="inline-flex w-fit items-center rounded-full border border-border/70 bg-muted/40 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
+              User + Admin Preview
+            </p>
+          )}
           <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground lg:text-[15px]">
             {project.shortDescription}
           </p>
