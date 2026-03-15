@@ -49,7 +49,7 @@ export default function SplashScreen({ onComplete }: { onComplete?: () => void }
       // Paint "enter" first, then animate into "hold"
       await new Promise<void>((resolve) => {
         raf1 = requestAnimationFrame(() => {
-          raf2 = requestAnimationFrame(resolve);
+          raf2 = requestAnimationFrame(() => resolve());
         });
       });
 
