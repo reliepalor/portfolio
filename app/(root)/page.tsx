@@ -9,6 +9,7 @@ import { Icons } from "../../components/common/icons";
 import ContributionCard from "@/components/contributions/contribution-card";
 import ExperienceCard from "@/components/experience/experience-card";
 import ProjectCard from "@/components/projects/project-card";
+import LiveDemoButton from "@/components/projects/live-demo-button";
 import SkillsCard from "@/components/skills/skills-card";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { featuredContributions } from "../../config/contributions";
@@ -182,10 +183,12 @@ export default function IndexPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
                 {featuredProjects.map((project, index) => (
                   <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
-                    <Link
-                      href={project.githubLink ?? project.websiteLink ?? `/projects/${project.id}`}
-                      className="group block transition-transform duration-200 hover:-translate-y-0.5"
-                    >
+                    {(() => {
+                      const liveDemoHref = project.websiteLink ?? project.githubLink;
+                      const hasExternalLink = Boolean(liveDemoHref);
+
+                      return (
+                    <div className="group block transition-transform duration-200 hover:-translate-y-0.5">
                       {/* Preview area */}
                       <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
                         <div className="relative h-[72%] w-[70%]">
@@ -204,18 +207,37 @@ export default function IndexPage() {
                       {/* Card footer — title + tag */}
                       <div className="px-0 py-3.5">
                         <div>
-                          <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
-                            {project.companyName}
-                          </p>
+                          <div className="flex justify-between">
+                            <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
+                              {project.companyName}
+                            </p>
+
+                            <div className="flex flex-wrap items-center gap-2">
+                              <LiveDemoButton
+                                href={liveDemoHref}
+                                className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                note={project.liveDemoNote}
+                                target={hasExternalLink ? "_blank" : undefined}
+                                rel={hasExternalLink ? "noopener noreferrer" : undefined}
+                              >
+                                Live Demo
+                              </LiveDemoButton>
+                            </div>
+
+                          </div>
+                         
                           <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
                             {project.type}
                           </p>
+                         
                         </div>
                         <span className="hidden">
                           ↗
                         </span>
                       </div>
-                    </Link>
+                    </div>
+                      );
+                    })()}
                   </AnimatedSection>
                 ))}
               </div>

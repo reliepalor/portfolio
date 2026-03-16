@@ -34,6 +34,7 @@ export interface ProjectInterface {
   shortDescription: string;
   websiteLink?: string;
   githubLink?: string;
+  liveDemoNote?: string;
   techStack: ValidSkills[];
   startDate: string;
   endDate: string;
@@ -76,8 +77,10 @@ export const Projects: ProjectInterface[] = [
     category: ["Full Stack", "Web Dev", "API"],
     shortDescription:
       "A full-stack video game e-commerce platform featuring cart management, order approval workflow, admin dashboard analytics, and a review & rating system.",
-    websiteLink: undefined,
+    websiteLink: "https://outspace.vercel.app",
     githubLink: undefined,
+    liveDemoNote:
+      "This live demo uses mock data and a mock environment, not the full production setup. Some features and data may be incomplete, inaccurate, or may not function as expected.",
     techStack: [
       "ASP.NET Core Web API",
       "Entity Framework Core",
@@ -162,6 +165,39 @@ export const Projects: ProjectInterface[] = [
     },
   },
 
+    //JAYA AI
+  {
+    id: "jaya",
+    companyName: "Jaya | Just ask your AI",
+    type: "Academics",
+    category: ["Web Dev", "Full Stack", "AI"],
+    shortDescription:
+      "Jaya AI is a vibrant AI-powered quiz adventure that turns any topic into fun, personalized challenges with playful visuals and instant feedback that keeps users coming back for more.",
+    websiteLink: "https://jaya-ai.vercel.app/",
+    githubLink: undefined,
+    liveDemoNote: "Quizzie is a fun app that creates custom quizzes on any topic and makes learning feel like a game.",
+    techStack: ["Typescript", "Angular", "Express JS", "AI"],
+    startDate: "2023-03-01", // adjust
+    endDate: "2023-06-01",
+    companyLogoImg: "/projects/jaya/jaya-project.png",
+    pagesInfoArr: [
+      {
+        title: " ",
+        description: "",
+        // imgArr: ["/projects/smart-lib/dashboard.png"]
+      },
+    
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "",
+      ],
+      bullets: [
+        ,
+      ],
+    },
+  },
+
   //Smart Library
   {
     id: "smart-lib",
@@ -172,6 +208,7 @@ export const Projects: ProjectInterface[] = [
       "A Laravel-based library system with QR-based book borrowing/returning, real-time book availability, and study space tracking.",
     websiteLink: undefined,
     githubLink: undefined,
+    liveDemoNote: "Live demo is not available yet.",
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
@@ -217,6 +254,7 @@ export const Projects: ProjectInterface[] = [
       "A Laravel and Tailwind-based pet eCommerce platform where users can browse and order pets, accessories, and food, complete with email order confirmations.",
     websiteLink: undefined,
     githubLink: undefined,
+    liveDemoNote: "Live demo is not available yet.",
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-01-01", 
     endDate: "2023-03-01",
@@ -263,6 +301,7 @@ export const Projects: ProjectInterface[] = [
       "A collection of interactive math games for elementary students, designed to make learning fun and engaging.",
     websiteLink: undefined,
     githubLink: undefined,
+    liveDemoNote: "Live demo is not available yet.",
     techStack: ["HTML 5", "CSS 3", "Javascript"],
     startDate: "2023-07-01", // adjust
     endDate: "2023-07-14",

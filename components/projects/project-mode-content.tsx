@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Icons } from "@/components/common/icons";
-import ProjectDescription from "@/components/projects/project-description";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
   getProjectPreviewByMode,
   getProjectPreviews,
@@ -13,21 +11,10 @@ import {
   ProjectViewMode,
 } from "@/config/projects";
 
-type VideoModal = { title: string; videoUrl: string } | null;
-
 export default function ProjectModeContent({ project }: { project: ProjectInterface }) {
   const previews = useMemo(() => getProjectPreviews(project), [project]);
   const hasAdminPreview = Boolean(previews.admin);
   const [mode, setMode] = useState<ProjectViewMode>("user");
-  const [videoModal, setVideoModal] = useState<VideoModal>(null);
-
-  const openVideo = useCallback((title: string, videoUrl: string) => {
-    setVideoModal({ title, videoUrl });
-  }, []);
-
-  const closeVideo = useCallback(() => {
-    setVideoModal(null);
-  }, []);
 
   const activeContent = useMemo(
     () => getProjectPreviewByMode(project, mode),
@@ -36,26 +23,6 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
 
   return (
     <>
-      {/* ── Video demo modal ─────────────────────────────────────────────── */}
-      <Dialog open={Boolean(videoModal)} onOpenChange={(open) => { if (!open) closeVideo(); }}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-2xl">
-          <DialogHeader className="px-5 pt-5 pb-0">
-            <DialogTitle className="text-base font-medium">{videoModal?.title}</DialogTitle>
-          </DialogHeader>
-          <div className="aspect-video w-full bg-black">
-            {videoModal && (
-              <video
-                key={videoModal.videoUrl}
-                src={videoModal.videoUrl}
-                controls
-                autoPlay
-                className="h-full w-full"
-              />
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-
       {/* ── Mode toggle ──────────────────────────────────────────────────── */}
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-border/60 bg-muted/20 p-4 sm:p-5 md:flex-row md:items-center md:justify-between">
         <div>
@@ -138,12 +105,12 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
                   </p>
                 )}
 
-                {/* Images — full width, play button overlay if videoUrl present */}
+                {/* Images — full width */}
                 <div className="mt-4 space-y-4">
                   {page.imgArr.map((img, imgIndex) => (
                     <div
                       key={imgIndex}
-                      className="group relative w-full overflow-hidden rounded-lg border bg-muted"
+                      className="relative w-full overflow-hidden rounded-lg border bg-muted"
                     >
                       <Image
                         src={img}
@@ -153,20 +120,6 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
                         className="w-full object-cover"
                         priority
                       />
-
-                      {/* Play button — bottom-left, low opacity on mobile, full on desktop hover */}
-                      {page.videoUrl && (
-                        <button
-                          type="button"
-                          onClick={() => openVideo(page.title, page.videoUrl!)}
-                          aria-label={`Play demo video for ${page.title}`}
-                          className="absolute bottom-3 left-3 opacity-40 transition-opacity duration-200 md:opacity-0 md:group-hover:opacity-100"
-                        >
-                          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white ring-2 ring-white/30 backdrop-blur-sm transition-transform duration-200 group-hover:scale-110">
-                            <Icons.play className="ml-0.5 h-5 w-5" />
-                          </span>
-                        </button>
-                      )}
                     </div>
                   ))}
                 </div>
