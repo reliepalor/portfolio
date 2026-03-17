@@ -175,7 +175,7 @@ export const Projects: ProjectInterface[] = [
       "Jaya AI is a vibrant AI-powered quiz adventure that turns any topic into fun, personalized challenges with playful visuals and instant feedback that keeps users coming back for more.",
     websiteLink: "https://jaya-ai.vercel.app/",
     githubLink: undefined,
-    liveDemoNote: "Quizzie is a fun app that creates custom quizzes on any topic and makes learning feel like a game.",
+    liveDemoNote: "Quizzie is a fun app that creates custom quizzes on any topic and makes learning feel like a game..",
     techStack: ["Typescript", "Angular", "Express JS", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
