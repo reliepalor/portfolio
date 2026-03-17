@@ -59,7 +59,7 @@ export default function LiveDemoButton({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Live Demo Notice</DialogTitle>
-            <DialogDescription>{note}</DialogDescription>
+            <DialogDescription className="whitespace-pre-line">{note}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             {canProceed ? (

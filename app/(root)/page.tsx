@@ -15,7 +15,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { featuredContributions } from "../../config/contributions";
 import { experiences } from "../../config/experience";
 import { pagesConfig } from "../../config/pages";
-import { featuredProjects } from "../../config/projects";
+import { Projects } from "../../config/projects";
 import { siteConfig } from "../../config/site";
 import { skills } from "../../config/skills";
 import { cn } from "@/lib/utils";
@@ -93,7 +93,7 @@ export default function IndexPage() {
 
               <AnimatedText delay={0.12}>
                 <p className="mt-4 text-2xl sm:text-md lg:text-[1.10rem] font-normal text-foreground">
-                  I create premium templates for creatives.
+                  I shape ideas into useful tools on the web
                 </p>
               </AnimatedText>
 
@@ -165,7 +165,7 @@ export default function IndexPage() {
                     <p className="text-[10px] font-sans tracking-[0.2em] uppercase text-muted-foreground/40 mb-1">
                       Selected work
                     </p>
-                    <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
+                    <h2 className="text-4xl sm:text-5xl font-normal tracking-tight">
                       {pagesConfig.projects.title}
                     </h2>
                   </div>
@@ -181,7 +181,7 @@ export default function IndexPage() {
 
               {/* Project grid — 2 cols, large preview cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
-                {featuredProjects.map((project, index) => (
+                {Projects.map((project, index) => (
                   <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
                     {(() => {
                       const liveDemoHref = project.websiteLink ?? project.githubLink;
@@ -189,51 +189,45 @@ export default function IndexPage() {
 
                       return (
                     <div className="group block transition-transform duration-200 hover:-translate-y-0.5">
-                      {/* Preview area */}
-                      <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
-                        <div className="relative h-[72%] w-[70%]">
-                          <Image
-                            src={project.companyLogoImg}
-                            alt={`${project.companyName} preview`}
-                            fill
-                            className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                          />
+                      <Link href={`/projects/${project.id}`} className="block">
+                        {/* Preview area */}
+                        <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
+                          <div className="relative h-[72%] w-[70%]">
+                            <Image
+                              src={project.companyLogoImg}
+                              alt={`${project.companyName} preview`}
+                              fill
+                              className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                          </div>
+
+
+                          <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
                         </div>
 
-
-                        <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
-                      </div>
-
-                      {/* Card footer — title + tag */}
-                      <div className="px-0 py-3.5">
-                        <div>
-                          <div className="flex justify-between">
-                            <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
-                              {project.companyName}
-                            </p>
-
-                            <div className="flex flex-wrap items-center gap-2">
-                              <LiveDemoButton
-                                href={liveDemoHref}
-                                className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-                                note={project.liveDemoNote}
-                                target={hasExternalLink ? "_blank" : undefined}
-                                rel={hasExternalLink ? "noopener noreferrer" : undefined}
-                              >
-                                Live Demo
-                              </LiveDemoButton>
-                            </div>
-
-                          </div>
-                         
+                        {/* Card footer — title + tag */}
+                        <div className="px-0 py-3.5">
+                          <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
+                            {project.companyName}
+                          </p>
                           <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
                             {project.type}
                           </p>
-                         
                         </div>
-                        <span className="hidden">
-                          ↗
-                        </span>
+                      </Link>
+
+                      <div className="-mt-1 px-0 pb-3.5">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <LiveDemoButton
+                            href={liveDemoHref}
+                            className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                            note={project.liveDemoNote}
+                            target={hasExternalLink ? "_blank" : undefined}
+                            rel={hasExternalLink ? "noopener noreferrer" : undefined}
+                          >
+                            Live Demo
+                          </LiveDemoButton>
+                        </div>
                       </div>
                     </div>
                       );

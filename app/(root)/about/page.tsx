@@ -26,7 +26,7 @@ interface AboutData {
 const aboutData: AboutData = {
   fullName: "John Relie Palor",
   description:
-    "I'm a 4th year student learning web development with a passion for creating modern, responsive websites and applications.",
+    "Dedicated to the craft of web development building modern, responsive websites while improving through patience, discipline, and constant learning.",
   education: {
     degree: "Bachelor of Science in Information Technology",
     school: "Cagayan State University",
@@ -34,12 +34,12 @@ const aboutData: AboutData = {
   },
   achievements: [
     {
-      title: "4th Place Static Web Design",
+      title: "Static Web Design",
       event: "Uniwide ICT Skills Olympics CSU",
       year: "2025",
     },
     {
-      title: "3rd Place Static Web Design",
+      title: "Static Web Design",
       event: "CSU-G Technolympics",
       year: "2024",
     },

@@ -80,7 +80,7 @@ export const Projects: ProjectInterface[] = [
     websiteLink: "https://outspace.vercel.app",
     githubLink: undefined,
     liveDemoNote:
-      "This live demo uses mock data and a mock environment, not the full production setup. Some features and data may be incomplete, inaccurate, or may not function as expected.",
+      "This live demo uses mock data and a mock environment, not the full production setup. Some features and data may be incomplete, inaccurate, or may not function as expected.\n\nCredentials for Admin\nAdmin: Admin@test.com\nPassword: Admin@123",
     techStack: [
       "ASP.NET Core Web API",
       "Entity Framework Core",
@@ -256,22 +256,22 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-01-01", 
     endDate: "2023-03-01",
-    companyLogoImg: "/projects/paw-haven/logo.png",
+    companyLogoImg: "/projects/paw-haven/vuew.png",
     pagesInfoArr: [
       {
         title: "Landing Page",
         description: "A clean landing page showcasing featured pets, products, and offers.",
-        imgArr: ["/projects/paw-haven/landing.png"],
+        imgArr: ["/projects/paw-haven/vuew.png"],
       },
       {
         title: "Product Browsing",
         description: "Browse pets, accessories, and food with category filters.",
-        imgArr: ["/projects/paw-haven/products.png"],
+        imgArr: ["/projects/paw-haven/vuew.png"],
       },
       {
         title: "Order System",
         description: "Integrated checkout with order confirmation via email.",
-        imgArr: ["/projects/paw-haven/orders.png"],
+        imgArr: ["/projects/paw-haven/vuew.png"],
       },
     ],
     descriptionDetails: {
