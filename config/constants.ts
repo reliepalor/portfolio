@@ -64,6 +64,7 @@ export type ValidSkills =
   | "ASP.NET Core Web API"
   | "Entity Framework Core"
   | "JWT Authentication"
+  | "AI"
   | "SQL Server";
 
 export type ValidCategory =
@@ -74,6 +75,7 @@ export type ValidCategory =
   | "Web Dev"
   | "Mobile Dev"
   | "3D Modeling"
+  | "AI"
   | "API";
 
 export type ValidExpType = "Personal" | "Academics";

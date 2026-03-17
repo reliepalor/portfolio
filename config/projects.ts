@@ -176,7 +176,7 @@ export const Projects: ProjectInterface[] = [
     websiteLink: "https://jaya-ai.vercel.app/",
     githubLink: undefined,
     liveDemoNote: "Quizzie is a fun app that creates custom quizzes on any topic and makes learning feel like a game..",
-    techStack: ["Typescript", "Angular", "Express JS", "AI"],
+    techStack: ["Typescript", "Angular", "express.js", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
     companyLogoImg: "/projects/jaya/jaya-project.png",
@@ -184,7 +184,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: " ",
         description: "",
-        // imgArr: ["/projects/smart-lib/dashboard.png"]
+        imgArr: ["/projects/jaya/jaya-project.png"]
       },
     
     ],
@@ -192,9 +192,7 @@ export const Projects: ProjectInterface[] = [
       paragraphs: [
         "",
       ],
-      bullets: [
-        ,
-      ],
+      bullets: [],
     },
   },
 
