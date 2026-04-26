@@ -99,7 +99,7 @@ export default function IndexPage() {
 
               {/* Description */}
               <AnimatedText delay={0.2}>
-                <p className="mt-16 max-w-[34rem] text-[1.05rem] leading-[1.6] text-foreground break-words lg:mt-20">
+                <p className="mt-16 max-w-[34rem] text-[1.05rem] leading-[1.6] text-foreground break-words text-justify lg:mt-20">
                   {siteConfig.description}
                 </p>
               </AnimatedText>
@@ -118,7 +118,7 @@ export default function IndexPage() {
 
       {/* ── Skills ───────────────────────────────────────────────────────── */}
       <AnimatedSection
-        className="mx-auto grid w-full max-w-[1760px] gap-10 px-4 py-16 sm:px-5 md:px-6 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 sm:py-20"
+        className="mx-auto grid w-full max-w-[1760px] gap-10 px-8 py-16 sm:px-8 md:px-10 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 sm:py-20"
         id="skills"
       >
         {/* Section label */}
@@ -156,7 +156,7 @@ export default function IndexPage() {
             className="py-16 sm:py-20 border-t border-border/30"
             id="projects"
           >
-            <div className="mx-auto w-full max-w-[1920px] px-3 sm:px-5 lg:px-6">
+            <div className="mx-auto w-full max-w-[1920px] px-8 sm:px-8 md:px-10">
 
               {/* Header */}
               <AnimatedText>
