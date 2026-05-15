@@ -108,8 +108,8 @@ export default function IndexPage() {
 
             {/* Right — Image only */}
             <div className="lg:mt-24 flex justify-center lg:justify-self-end lg:justify-end lg:pt-6">
-              <div className="w-full max-w-[500px]">
-                <RightVisual />
+                <div className="w-full max-w-[500px]">
+                <RightVisual delay={0.9} />
               </div>
             </div>
 

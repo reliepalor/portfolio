@@ -5,9 +5,11 @@ import blurProfileImg from "@/assets/image/blurprofile.png";
 import profileImg from "@/assets/image/profile-img.jpg";
 import { siteConfig } from "../../config/site";
 
-const RightVisual = () => {
+type Props = { delay?: number };
+
+const RightVisual = ({ delay = 0.4 }: Props) => {
   return (
-    <AnimatedText delay={0.4}>
+    <AnimatedText delay={delay}>
       <div className="group relative w-full overflow-hidden rounded-lg">
         <Image
           src={blurProfileImg}

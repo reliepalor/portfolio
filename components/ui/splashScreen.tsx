@@ -1,100 +1,123 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const words = [
-  { text: "こんにちは", lang: "ja", label: "Japanese" },
-  { text: "Hola",       lang: "es", label: "Spanish"  },
-  { text: "Hello",      lang: "en", label: "English"  },
+  { text: "hola", lang: "es" },
 ];
 
-const HOLD_DURATION = 620;  // ms each non-last word is held
-const EXIT_DURATION = 430;  // ms word exit animation
-const LAST_HOLD     = 860;  // ms last word is held
-const SCREEN_FADE   = 760;  // ms entire screen fades out
+// ── Timing ──────────────────────────────────────────────────────────────────
+const LETTER_STAGGER  = 72;    // ms between successive letter entrances
+const LETTER_EXIT_LAG = 36;    // ms between successive letter exits (reverse)
+const HOLD_AFTER_IN   = 900;   // hold after last letter enters (non-last words)
+const EXIT_DURATION   = 680;   // total duration of exit animation before next word
+const LAST_HOLD       = 1500;  // hold on last word before screen fade (reduced to 1.5s)
+const SCREEN_FADE     = 1200;  // ms for full-screen opacity → 0
 
-type Phase = "enter" | "hold" | "exit";
+type LetterState = "idle" | "entering" | "exiting";
+
+interface LetterInfo {
+  char: string;
+  state: LetterState;
+  key: number;
+}
 
 export default function SplashScreen({ onComplete }: { onComplete?: () => void }) {
-  const [index, setIndex]     = useState(0);
-  const [phase, setPhase]     = useState<Phase>("enter");
+  const [index,   setIndex]   = useState(0);
+  const [letters, setLetters] = useState<LetterInfo[]>([]);
   const [leaving, setLeaving] = useState(false);
+
   const onCompleteRef = useRef(onComplete);
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const timers        = useRef<number[]>([]);
+  const cancelled     = useRef(false);
+  const keyCounter    = useRef(0);
 
-  useEffect(() => {
-    onCompleteRef.current = onComplete;
-  }, [onComplete]);
+  useEffect(() => { onCompleteRef.current = onComplete; }, [onComplete]);
 
-  const clearTimers = () => {
+   const clearTimers = useCallback(() => { 
     timers.current.forEach(clearTimeout);
     timers.current = [];
-  };
+  }, []);
 
-  const wait = (ms: number) =>
-    new Promise<void>((resolve) => {
-      const id = setTimeout(resolve, ms);
-      timers.current.push(id);
+  const wait = useCallback((ms: number) =>
+     new Promise<void>((resolve) => { 
+       const id = window.setTimeout(() => { if (!cancelled.current) resolve(); }, ms);
+       timers.current.push(id); 
+    }), []);
+
+  const setLetterState = useCallback((i: number, state: LetterState) => {
+    setLetters((prev) => {
+      const next = [...prev];
+      if (next[i]) next[i] = { ...next[i], state };
+      return next;
     });
+  }, []);
 
-  // Deterministic per-word cycle: enter -> hold -> exit -> next (or leave)
   useEffect(() => {
-    let cancelled = false;
-    let raf1 = 0;
-    let raf2 = 0;
+    cancelled.current = false;
 
-    const runCycle = async () => {
-      setPhase("enter");
-
-      // Paint "enter" first, then animate into "hold"
-      await new Promise<void>((resolve) => {
-        raf1 = requestAnimationFrame(() => {
-          raf2 = requestAnimationFrame(() => resolve());
-        });
-      });
-
-      if (cancelled) return;
-      setPhase("hold");
-
+    const run = async () => {
+      const word   = words[index];
       const isLast = index === words.length - 1;
-      await wait(isLast ? LAST_HOLD : HOLD_DURATION);
 
-      if (cancelled) return;
+      // Build letter list in "idle" state
+      // Use split() instead of spread to avoid downlevelIteration issues
+      const built: LetterInfo[] = word.text.split("").map((char) => ({
+        char,
+        state: "idle",
+        key:   keyCounter.current++,
+      }));
+      setLetters(built);
+
+      // One rAF so React flushes the idle render before we animate
+      // Wrap the resolve so its signature matches FrameRequestCallback
+      await new Promise<void>((res) => requestAnimationFrame(() => requestAnimationFrame(() => res())));
+      if (cancelled.current) return;
+
+      // ── Enter: stagger letters left → right ─────────────────────────────
+      for (let i = 0; i < built.length; i++) {
+        if (i > 0) await wait(LETTER_STAGGER);
+        if (cancelled.current) return;
+        setLetterState(i, "entering");
+      }
+
+      // ── Hold ─────────────────────────────────────────────────────────────
+      await wait(isLast ? LAST_HOLD : HOLD_AFTER_IN);
+      if (cancelled.current) return;
 
       if (isLast) {
-        setLeaving(true);
+         setLeaving(true); 
         await wait(SCREEN_FADE);
-        if (!cancelled) onCompleteRef.current?.();
+        if (!cancelled.current) onCompleteRef.current?.();
         return;
       }
 
-      setPhase("exit");
-      await wait(EXIT_DURATION);
-
-      if (!cancelled) {
-        setIndex((i) => i + 1);
+      // ── Exit: stagger right → left ───────────────────────────────────────
+      for (let i = built.length - 1; i >= 0; i--) {
+        if (i < built.length - 1) await wait(LETTER_EXIT_LAG);
+        if (cancelled.current) return;
+        setLetterState(i, "exiting");
       }
+
+      await wait(EXIT_DURATION);
+      if (!cancelled.current) setIndex((n) => n + 1);
     };
 
-    runCycle();
+    run();
 
     return () => {
-      cancelled = true;
-      if (raf1) cancelAnimationFrame(raf1);
-      if (raf2) cancelAnimationFrame(raf2);
+      cancelled.current = true;
       clearTimers();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
-
-  const current  = words[index];
-  const wordClass = ["sp-word", phase === "hold" ? "hold" : phase === "exit" ? "exit" : ""].filter(Boolean).join(" ");
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
 
-        /* ── Root overlay ─────────────────────────────────────────────────── */
+        /* ── Root overlay ─────────────────────────────────────────────── */
         .sp-root {
           position: fixed;
           inset: 0;
@@ -104,169 +127,87 @@ export default function SplashScreen({ onComplete }: { onComplete?: () => void }
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          background: #111113;
+          background: #0e0e10;
           opacity: 1;
-          transition: opacity ${SCREEN_FADE}ms cubic-bezier(0.65, 0, 0.35, 1);
+          transition: opacity ${SCREEN_FADE}ms cubic-bezier(0.4, 0, 0.2, 1);
           pointer-events: all;
         }
         .sp-root.leaving {
           opacity: 0;
           pointer-events: none;
         }
-        .sp-root::before {
-          content: "";
+
+        /* ── Single ambient glow — no blobs, no noise ─────────────────── */
+        .sp-glow {
           position: absolute;
-          inset: -25%;
-          background:
-            radial-gradient(52% 44% at 50% 45%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 72%),
-            radial-gradient(80% 70% at 50% 50%, rgba(18, 24, 42, 0.42) 0%, rgba(8, 10, 16, 0.68) 72%);
-          z-index: 0;
+          width: 900px;
+          height: 900px;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(ellipse at center,
+            rgba(70, 60, 190, 0.09) 0%,
+            rgba(30, 70, 160, 0.05) 45%,
+            transparent 70%
+          );
           pointer-events: none;
-          animation: spPulse 8.5s ease-in-out infinite;
+          animation: sp-glow-pulse 6s ease-in-out infinite;
+        }
+        @keyframes sp-glow-pulse {
+          0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+          50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
         }
 
-        /* ── Animated blobs ───────────────────────────────────────────────── */
-        .sp-bg { position: absolute; inset: 0; overflow: hidden; }
-        .sp-blob { position: absolute; border-radius: 50%; }
-
-        .sp-blob-1 {
-          width: 720px; height: 720px; top: -210px; left: -190px;
-          background: radial-gradient(circle, #2e2c6e 0%, transparent 60%);
-          filter: blur(130px); opacity: 0.32;
-          animation: bd1 20s ease-in-out infinite alternate;
-        }
-        .sp-blob-2 {
-          width: 620px; height: 620px; bottom: -150px; right: -130px;
-          background: radial-gradient(circle, #133322 0%, transparent 60%);
-          filter: blur(140px); opacity: 0.28;
-          animation: bd2 24s ease-in-out infinite alternate;
-        }
-        .sp-blob-3 {
-          width: 440px; height: 440px; top: 33%; left: 48%;
-          background: radial-gradient(circle, #4a1520 0%, transparent 60%);
-          filter: blur(110px); opacity: 0.22;
-          animation: bd3 16s ease-in-out infinite alternate;
-        }
-        .sp-blob-4 {
-          width: 360px; height: 360px; bottom: 18%; left: 6%;
-          background: radial-gradient(circle, #082038 0%, transparent 60%);
-          filter: blur(120px); opacity: 0.24;
-          animation: bd4 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes bd1 { from{transform:translate(0,0) scale(1)} to{transform:translate(55px,75px) scale(1.14)} }
-        @keyframes bd2 { from{transform:translate(0,0) scale(1)} to{transform:translate(-65px,-55px) scale(1.12)} }
-        @keyframes bd3 { from{transform:translate(0,0) scale(1)} to{transform:translate(-45px,45px) scale(0.87)} }
-        @keyframes bd4 { from{transform:translate(0,0) scale(1)} to{transform:translate(35px,-35px) scale(1.1)} }
-        @keyframes spPulse {
-          0%   { transform: scale(1); opacity: 0.9; }
-          50%  { transform: scale(1.04); opacity: 1; }
-          100% { transform: scale(1); opacity: 0.9; }
-        }
-
-        /* ── Glass + noise ────────────────────────────────────────────────── */
-        .sp-glass {
-          position: absolute; inset: 0;
-          backdrop-filter: blur(130px) saturate(200%) brightness(0.48);
-          -webkit-backdrop-filter: blur(130px) saturate(200%) brightness(0.48);
-          background: rgba(10, 10, 12, 0.78);
-        }
-        .sp-noise, .sp-noise2, .sp-noise3 {
-          position: absolute; inset: -60%; width: 220%; height: 220%; pointer-events: none;
-        }
-        .sp-noise {
-          opacity: 0.15;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          background-size: 160px 160px; animation: nz1 0.08s steps(1) infinite;
-        }
-        .sp-noise2 {
-          opacity: 0.09;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E");
-          background-size: 260px 260px; animation: nz2 0.14s steps(1) infinite;
-        }
-        .sp-noise3 {
-          opacity: 0.07;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.28' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E");
-          background-size: 380px 380px; animation: nz3 0.22s steps(1) infinite;
-        }
-        @keyframes nz1 {
-          0%{transform:translate(0,0)}   20%{transform:translate(-10px,6px)}
-          40%{transform:translate(7px,-9px)} 60%{transform:translate(-6px,10px)}
-          80%{transform:translate(9px,-5px)} 100%{transform:translate(-4px,8px)}
-        }
-        @keyframes nz2 {
-          0%{transform:translate(0,0)} 33%{transform:translate(8px,-7px)}
-          66%{transform:translate(-9px,5px)} 100%{transform:translate(6px,8px)}
-        }
-        @keyframes nz3 {
-          0%{transform:translate(0,0)} 50%{transform:translate(-7px,9px)}
-          100%{transform:translate(8px,-6px)}
-        }
-
-        /* ── Word content ─────────────────────────────────────────────────── */
-        .sp-content {
+        /* ── Word row ─────────────────────────────────────────────────── */
+        .sp-word {
           position: relative;
           z-index: 2;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 14px;
-          padding: 0 40px;
+          align-items: baseline;
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(52px, 9.5vw, 96px);
+          font-weight: 300;
+          color: rgba(242, 244, 252, 0.96);
+          line-height: 1;
+          letter-spacing: 0.04em;
           user-select: none;
         }
 
-        /* enter state — hidden, shifted up from below, blurred */
-        .sp-word {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(48px, 9.5vw, 95px);
-          font-weight: 300;
-          color: rgba(244, 246, 252, 0.95);
-          line-height: 1;
-          letter-spacing: 0.012em;
-          text-shadow: 0 16px 40px rgba(2, 4, 8, 0.5);
+        /* ── Per-letter states ────────────────────────────────────────── */
+        .sp-letter {
+          display: inline-block;
           will-change: opacity, transform, filter;
+
+          /* idle — invisible, below, blurred */
           opacity: 0;
-          transform: translateY(24px) scale(0.98);
-          filter: blur(16px);
-          transition:
-            opacity   0.78s cubic-bezier(0.2, 0.8, 0.2, 1),
-            transform 0.78s cubic-bezier(0.2, 0.8, 0.2, 1),
-            filter    0.78s cubic-bezier(0.2, 0.8, 0.2, 1);
+          transform: translateY(28px) scale(0.85);
+          filter: blur(14px);
+          transition: none;
         }
-        /* hold — fully visible */
-        .sp-word.hold {
+
+        /* entering — Apple-style overdamped spring */
+        .sp-letter.entering {
           opacity: 1;
           transform: translateY(0) scale(1);
           filter: blur(0px);
-        }
-        /* exit — shoots upward */
-        .sp-word.exit {
-          opacity: 0;
-          transform: translateY(-20px) scale(1.015);
-          filter: blur(14px);
           transition:
-            opacity   0.44s cubic-bezier(0.32, 0, 0.67, 0),
-            transform 0.44s cubic-bezier(0.32, 0, 0.67, 0),
-            filter    0.44s cubic-bezier(0.32, 0, 0.67, 0);
+            opacity   900ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+            filter    700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* language label */
-        .sp-label {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(10px, 1.2vw, 13px);
-          font-weight: 300;
-          font-style: italic;
-          letter-spacing: 0.24em;
-          text-transform: uppercase;
-          color: rgba(238, 238, 242, 0.34);
-          will-change: opacity;
+        /* exiting — float up + dissolve */
+        .sp-letter.exiting {
           opacity: 0;
-          transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.14s;
+          transform: translateY(-16px) scale(1.03);
+          filter: blur(8px);
+          transition:
+            opacity   550ms cubic-bezier(0.4, 0, 1, 1),
+            transform 650ms cubic-bezier(0.4, 0, 0.6, 1),
+            filter    500ms cubic-bezier(0.4, 0, 1, 1);
         }
-        .sp-label.hold { opacity: 1; }
-        .sp-label.exit  { opacity: 0; transition: opacity 0.4s ease; }
 
-        /* progress dots */
+        /* ── Progress dots ────────────────────────────────────────────── */
         .sp-dots {
           position: absolute;
           bottom: 9vh;
@@ -274,7 +215,7 @@ export default function SplashScreen({ onComplete }: { onComplete?: () => void }
           transform: translateX(-50%);
           z-index: 2;
           display: flex;
-          gap: 9px;
+          gap: 8px;
           align-items: center;
         }
         .sp-dot {
@@ -282,50 +223,42 @@ export default function SplashScreen({ onComplete }: { onComplete?: () => void }
           height: 3px;
           border-radius: 50%;
           background: rgba(238, 238, 242, 0.16);
-          transition: background 0.55s ease, transform 0.55s ease;
+          transition:
+            background 550ms cubic-bezier(0.16, 1, 0.3, 1),
+            transform  550ms cubic-bezier(0.16, 1, 0.3, 1);
         }
         .sp-dot.active {
-          background: rgba(238, 238, 242, 0.78);
-          transform: scale(1.75);
+          background: rgba(238, 238, 242, 0.75);
+          transform: scale(1.7);
         }
 
         @media (max-width: 768px) {
-          .sp-content { gap: 12px; }
-          .sp-word { font-size: clamp(35px, 10vw, 58px); }
-          .sp-dots { bottom: 8vh; }
+          .sp-word { font-size: clamp(38px, 11vw, 60px); }
+          .sp-glow  { width: 600px; height: 600px; }
         }
       `}</style>
 
       <div className={`sp-root${leaving ? " leaving" : ""}`}>
-        {/* Background layers */}
-        <div className="sp-bg">
-          <div className="sp-blob sp-blob-1" />
-          <div className="sp-blob sp-blob-2" />
-          <div className="sp-blob sp-blob-3" />
-          <div className="sp-blob sp-blob-4" />
-          <div className="sp-glass" />
-          <div className="sp-noise"  />
-          <div className="sp-noise2" />
-          <div className="sp-noise3" />
-        </div>
+        <div className="sp-glow" />
 
-        {/* Word + language label */}
-        <div className="sp-content">
-          <span className={wordClass} lang={current.lang}>
-            {current.text}
-          </span>
-          <span className={["sp-label", phase === "hold" ? "hold" : phase === "exit" ? "exit" : ""].filter(Boolean).join(" ")}>
-            {/* {current.label} */}
-          </span>
-        </div>
-
-        {/* Progress dots 
-        <div className="sp-dots">
-          {words.map((_, i) => (
-            <div key={i} className={`sp-dot${i === index ? " active" : ""}`} />
+        <div className="sp-word" lang={words[index]?.lang}>
+          {letters.map((l) => (
+            <span
+              key={l.key}
+              className={`sp-letter${l.state !== "idle" ? ` ${l.state}` : ""}`}
+            >
+              {l.char === " " ? "\u00A0" : l.char}
+            </span>
           ))}
         </div>
-        */}
+
+        {words.length > 1 && (
+          <div className="sp-dots">
+            {words.map((_, i) => (
+              <div key={i} className={`sp-dot${i === index ? " active" : ""}`} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
