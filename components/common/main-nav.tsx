@@ -100,11 +100,17 @@ export function MainNav({ items, children }: MainNavProps) {
 
   const isItemActive = React.useCallback(
     (href: string) => {
+      const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
+      const normalizedHref = href.replace(/\/+$/, "") || "/";
+
       if (href === "/") {
-        return pathname === "/";
+        return normalizedPathname === "/";
       }
 
-      return pathname.startsWith(href);
+      return (
+        normalizedPathname === normalizedHref ||
+        normalizedPathname.startsWith(`${normalizedHref}/`)
+      );
     },
     [pathname]
   );
@@ -112,12 +118,15 @@ export function MainNav({ items, children }: MainNavProps) {
   const updatePillPosition = React.useCallback(() => {
     const activeIndex = navItems.findIndex((item) => isItemActive(item.href));
 
-    if (typeof activeIndex === "number" && activeIndex >= 0) {
-      const el = itemRefs.current[activeIndex];
+    if (activeIndex < 0) {
+      setPillStyle({ left: 0, width: 0 });
+      return;
+    }
 
-      if (el) {
-        setPillStyle({ left: el.offsetLeft, width: el.offsetWidth });
-      }
+    const el = itemRefs.current[activeIndex];
+
+    if (el) {
+      setPillStyle({ left: el.offsetLeft, width: el.offsetWidth });
     }
   }, [isItemActive, navItems]);
 

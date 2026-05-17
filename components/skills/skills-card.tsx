@@ -1,4 +1,8 @@
+"use client";
+
 import { skillsInterface } from "@/config/skills";
+import { motion } from "framer-motion";
+import { Icons } from "@/components/common/icons";
 
 interface SkillsCardProps {
   skills: skillsInterface[];
@@ -29,18 +33,36 @@ const getHoverColorClass = (skillName: string) => {
 
 const getGroupLabel = (skillName: string) => {
   const normalized = skillName.trim().toLowerCase();
+  const frontend = new Set([
+    "html 5",
+    "css 3",
+    "typescript",
+    "react",
+    "angular",
+    "tailwind css",
+    "javascript",
+  ]);
 
-  const frontend = new Set(["html 5", "css 3", "typescript", "react", "angular", "tailwind css"]);
-  const backend = new Set(["php", "laravel", ".net", "mysql", "firebase"]);
-  const devTools = new Set([ "git & github", "git", "vercel","postman"]);
+  const backend = new Set(["php", "laravel", ".net", "express", "express.js"]);
+
+  const database = new Set([
+    "mysql",
+    "firebase",
+    "mssql",
+    "ms sql",
+    "supabase",
+  ]);
+
+  const tools = new Set(["git & github", "git", "postman", "vercel"]);
 
   if (frontend.has(normalized)) return "Frontend";
   if (backend.has(normalized)) return "Backend";
-  if (devTools.has(normalized)) return "DevOps & Cloud";
+  if (database.has(normalized)) return "Database";
+  if (tools.has(normalized)) return "Tools";
   return "Others";
 };
 
-const groupOrder = ["Frontend", "Backend", "DevOps & Cloud", "Others"];
+const groupOrder = ["Frontend", "Backend", "Database", "Tools", "Others"];
 
 export default function SkillsCard({ skills, compactMobile = false }: SkillsCardProps) {
   const groupedSkills = groupOrder
@@ -53,8 +75,14 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
   /* ── Mobile: grouped rows ── */
   const mobileView = (
     <div className="sm:hidden space-y-6">
-      {groupedSkills.map((group) => (
-        <div key={group.label}>
+      {groupedSkills.map((group, index) => (
+        <motion.div
+          key={group.label}
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, delay: index * 1.0, ease: "easeOut" }}
+        >
           {/* divider + label */}
           <div className="flex items-center gap-3 mb-3">
             <span className="text-[11px] tracking-widest uppercase text-muted-foreground/50 font-sans whitespace-nowrap">
@@ -63,17 +91,20 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
             <div className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-            {group.items.map((skill) => (
-              <button
-                key={skill.name}
-                className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 ${getHoverColorClass(skill.name)}`}
-              >
-                <skill.icon className="h-4 w-4 shrink-0" />
-                <span>{skill.name}</span>
-              </button>
-            ))}
+            {group.items.map((skill) => {
+              const Icon = (Icons as any)[skill.icon];
+              return (
+                <button
+                  key={skill.name}
+                  className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 ${getHoverColorClass(skill.name)}`}
+                >
+                  {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
+                  <span>{skill.name}</span>
+                </button>
+              );
+            })}
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
@@ -81,8 +112,14 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
   /* ── Desktop: two-column FAQ-style layout ── */
   const desktopView = (
     <div className="hidden sm:block w-full">
-      {groupedSkills.map((group) => (
-        <div key={group.label}>
+      {groupedSkills.map((group, index) => (
+        <motion.div
+          key={group.label}
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: index * 1.0, ease: "easeOut" }}
+        >
           {/* top divider */}
           <div className="h-px bg-border" />
           <div className="py-5">
@@ -90,18 +127,21 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
               {group.label}
             </span>
             <div className="mt-3 flex flex-wrap gap-x-8 gap-y-3">
-              {group.items.map((skill) => (
-                <div
-                  key={skill.name}
-                  className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
-                >
-                  <skill.icon className="h-4 w-4 shrink-0" />
-                  <span>{skill.name}</span>
-                </div>
-              ))}
+              {group.items.map((skill) => {
+                const Icon = (Icons as any)[skill.icon];
+                return (
+                  <div
+                    key={skill.name}
+                    className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
+                  >
+                    {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
+                    <span>{skill.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
       {/* bottom divider */}
       <div className="h-px bg-border" />
@@ -126,7 +166,10 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
           <div
             className={`flex items-center gap-3 py-4 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
           >
-            <skill.icon className="h-4 w-4 shrink-0 ml-[11.5rem]" />
+            {(() => {
+              const Icon = (Icons as any)[skill.icon];
+              return Icon ? <Icon className="h-4 w-4 shrink-0 ml-[11.5rem]" /> : null;
+            })()}
             <span>{skill.name}</span>
           </div>
           <div className="h-px bg-border" />

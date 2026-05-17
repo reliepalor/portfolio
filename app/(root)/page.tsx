@@ -118,11 +118,11 @@ export default function IndexPage() {
 
       {/* ── Skills ───────────────────────────────────────────────────────── */}
       <AnimatedSection
-        className="mx-auto grid w-full max-w-[1760px] gap-10 px-8 py-16 sm:px-8 md:px-10 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 sm:py-20"
+        className="mx-auto grid w-full max-w-[1400px] gap-10 px-8 py-16 sm:px-8 md:px-10 lg:grid-cols-[0.72fr_1.3fr] lg:items-start lg:gap-16 sm:py-20"
         id="skills"
       >
         {/* Section label */}
-        <div className="w-full lg:pt-1">
+        <div className="flex w-full max-w-[31rem] flex-col pt-0 lg:justify-self-start lg:pt-2">
           <AnimatedText>
             <div className="flex items-center justify-between">
               <div className="space-y-1">
@@ -156,86 +156,88 @@ export default function IndexPage() {
             className="py-16 sm:py-20 border-t border-border/30"
             id="projects"
           >
-            <div className="mx-auto w-full max-w-[1920px] px-8 sm:px-8 md:px-10">
-
-              {/* Header */}
+            <div className="mx-auto w-full max-w-[1400px] px-8 sm:px-8 md:px-10">
               <AnimatedText>
-                <div className="flex items-end justify-between mb-10">
-                  <div>
-                    <p className="text-[10px] font-sans tracking-[0.2em] uppercase text-muted-foreground/40 mb-1">
-                      Selected work
-                    </p>
-                    <h2 className="text-4xl sm:text-5xl font-normal tracking-tight">
-                      {pagesConfig.projects.title}
-                    </h2>
-                  </div>
-                  <Link
-                    href="/projects"
-                    className="text-[11px] font-sans tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-200"
-                  >
-                    View all →
-                  </Link>
-                </div>
-                <div className="h-px w-full bg-border/30 mb-10" />
-              </AnimatedText>
-
-              {/* Project grid — 2 cols, large preview cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
-                {Projects.map((project, index) => (
-                  <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
-                    {(() => {
-                      const liveDemoHref = project.websiteLink ?? project.githubLink;
-                      const hasExternalLink = Boolean(liveDemoHref);
-
-                      return (
-                    <div className="group block transition-transform duration-200 hover:-translate-y-0.5">
-                      <Link href={`/projects/${project.id}`} className="block">
-                        {/* Preview area */}
-                        <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
-                          <div className="relative h-[72%] w-[70%]">
-                            <Image
-                              src={project.companyLogoImg}
-                              alt={`${project.companyName} preview`}
-                              fill
-                              className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                            />
-                          </div>
-
-
-                          <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
-                        </div>
-
-                        {/* Card footer — title + tag */}
-                        <div className="px-0 py-3.5">
-                          <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
-                            {project.companyName}
-                          </p>
-                          <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
-                            {project.type}
-                          </p>
-                        </div>
-                      </Link>
-
-                      <div className="-mt-1 px-0 pb-3.5">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <LiveDemoButton
-                            href={liveDemoHref}
-                            className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-                            note={project.liveDemoNote}
-                            target={hasExternalLink ? "_blank" : undefined}
-                            rel={hasExternalLink ? "noopener noreferrer" : undefined}
-                          >
-                            Live Demo
-                          </LiveDemoButton>
-                        </div>
-                      </div>
+                <div className="flex w-full max-w-[31rem] flex-col pt-0 lg:justify-self-start lg:pt-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <p className="text-[11px] font-sans text-muted-foreground/50 tracking-widest uppercase">
+                        Selected work
+                      </p>
+                      <h2 className="mt-2 text-4xl font-normal tracking-tight sm:text-5xl">
+                        {pagesConfig.projects.title}
+                      </h2>
                     </div>
-                      );
-                    })()}
-                  </AnimatedSection>
-                ))}
-              </div>
+                    <Link
+                      href="/projects"
+                      className="text-xs font-sans text-muted-foreground/50 transition-colors tracking-wider uppercase hover:text-foreground"
+                    >
+                      View all →
+                    </Link>
+                  </div>
+                </div>
+              </AnimatedText>
+            </div>
 
+            <div className="mx-auto mt-10 w-full max-w-[1920px] px-8 sm:px-8 md:px-10">
+              {/* Project grid — 2 cols, large preview cards */}
+              <AnimatedText>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-6">
+                  {Projects.map((project, index) => (
+                    <AnimatedSection key={project.id} delay={0.1 * (index + 1)} direction="up">
+                      {(() => {
+                        const liveDemoHref = project.websiteLink ?? project.githubLink;
+                        const hasExternalLink = Boolean(liveDemoHref);
+
+                        return (
+                          <div className="group block transition-transform duration-200 hover:-translate-y-0.5">
+                            <Link href={`/projects/${project.id}`} className="block">
+                              {/* Preview area */}
+                              <div className="relative aspect-[16/10.2] overflow-hidden rounded-md bg-[#e4e4e4] p-4 flex items-center justify-center dark:bg-[#2a2a2a] sm:p-6 md:p-7">
+                                <div className="relative h-[72%] w-[70%]">
+                                  <Image
+                                    src={project.companyLogoImg}
+                                    alt={`${project.companyName} preview`}
+                                    fill
+                                    className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                                  />
+                                </div>
+
+
+                                <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
+                              </div>
+
+                              {/* Card footer — title + tag */}
+                              <div className="px-0 py-3.5">
+                                <p className="mb-1 text-lg font-normal leading-[1.25] text-foreground sm:text-xl">
+                                  {project.companyName}
+                                </p>
+                                <p className="text-sm font-light leading-none text-foreground/90 sm:text-base">
+                                  {project.type}
+                                </p>
+                              </div>
+                            </Link>
+
+                            <div className="-mt-1 px-0 pb-3.5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <LiveDemoButton
+                                  href={liveDemoHref}
+                                  className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                  note={project.liveDemoNote}
+                                  target={hasExternalLink ? "_blank" : undefined}
+                                  rel={hasExternalLink ? "noopener noreferrer" : undefined}
+                                >
+                                  Live Demo
+                                </LiveDemoButton>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </AnimatedSection>
+                  ))}
+                </div>
+              </AnimatedText>
             </div>
           </AnimatedSection>
 
