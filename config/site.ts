@@ -9,7 +9,7 @@ export const siteConfig = {
   links: {
     twitter: "", // none provided
     github: "https://github.com/reliepalor",
-    linkedin: "https://www.linkedin.com/in/john-relie-palor-2053a3284/",
+    linkedin: "https://www.linkedin.com/in/relie-palor/",
   },
   ogImage: "",
   iconIco: "/assets/image/favicon.ico",

@@ -81,7 +81,7 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55, delay: index * 1.0, ease: "easeOut" }}
+          transition={{ duration: 0.35, delay: index * 0.18, ease: "easeOut" }}
         >
           {/* divider + label */}
           <div className="flex items-center gap-3 mb-3">
@@ -118,7 +118,7 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: index * 1.0, ease: "easeOut" }}
+          transition={{ duration: 0.38, delay: index * 0.18, ease: "easeOut" }}
         >
           {/* top divider */}
           <div className="h-px bg-border" />
