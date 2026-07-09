@@ -1,11 +1,13 @@
 import "./globals.css";
 
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "../config/site";
 import { cn } from "@/lib/utils";
+
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -95,6 +97,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {children}
           <Toaster />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
