@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMemo, useState, useEffect } from "react";
 
 import { Icons } from "@/components/common/icons";
 import {
@@ -20,6 +21,19 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
     () => getProjectPreviewByMode(project, mode),
     [mode, project]
   );
+
+  const heroImages = Array.isArray(activeContent.companyLogoImg)
+    ? activeContent.companyLogoImg
+    : [activeContent.companyLogoImg];
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+
+  useEffect(() => {
+    if (heroImages.length <= 1) return;
+    const timer = setInterval(() => {
+      setActiveHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
 
   return (
     <>
@@ -69,14 +83,29 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
 
         {/* Hero image */}
         <section>
-          <Image
-            src={activeContent.companyLogoImg}
-            alt={`${project.companyName} ${mode} preview`}
-            width={1280}
-            height={720}
-            className="w-full rounded-xl border bg-muted object-cover transition-colors"
-            priority
-          />
+          <AnimatePresence mode="wait" initial={false}>
+            {heroImages.map((src, index) =>
+              index === activeHeroIndex ? (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative w-full"
+                  style={{ aspectRatio: "16/9" }}
+                >
+                  <Image
+                    src={src}
+                    alt={`${project.companyName} ${mode} preview`}
+                    fill
+                    className="rounded-xl border bg-muted object-cover"
+                    priority={index === 0}
+                  />
+                </motion.div>
+              ) : null
+            )}
+          </AnimatePresence>
         </section>
 
         {/* Description — only when there is actual content */}

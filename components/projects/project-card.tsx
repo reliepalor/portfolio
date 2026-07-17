@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import { Icons } from "../common/icons";
 import ChipContainer from "@/components/ui/chip-container";
@@ -21,6 +22,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const primaryLink = project.websiteLink || project.githubLink || `/projects/${project.id}`;
   const hasAdminPreview = Boolean(project.adminPreview);
 
+  const logoImages = Array.isArray(project.companyLogoImg)
+    ? project.companyLogoImg
+    : [project.companyLogoImg];
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (logoImages.length <= 1) return;
+    const timer = setInterval(() => {
+      setActiveImageIndex((prev) => (prev + 1) % logoImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [logoImages.length]);
+
   return (
     <motion.article
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-background/95 transition-all duration-500 hover:-translate-y-1 hover:border-border hover:shadow-2xl hover:shadow-black/10"
@@ -30,24 +44,32 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       viewport={{ once: true, margin: "-120px" }}
     >
       <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[16/11]">
+        <AnimatePresence mode="wait" initial={false}>
+          {logoImages.map((src, index) =>
+            index === activeImageIndex ? (
+              <motion.div
+                key={`${project.id}-${index}`}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0"
+              >
+                <Image
+                  className="object-cover"
+                  src={src}
+                  alt={`${project.companyName} preview`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 45vw"
+                />
+              </motion.div>
+            ) : null
+          )}
+        </AnimatePresence>
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-black/0 to-black/0 opacity-80" />
-        <Image
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-          src={project.companyLogoImg}
-          alt={`${project.companyName} preview`}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 45vw"
-        />
-        <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between p-3 sm:p-4">
-          <span className="rounded-full border border-border/70 bg-background/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground backdrop-blur-sm">
-            {project.type}
-          </span>
+        <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-end p-3 sm:p-4">
           <span className="rounded-full border border-border/70 bg-background/90 p-2 text-muted-foreground backdrop-blur-sm">
-            {project.type === "Personal" ? (
-              <Icons.userFill className="h-3.5 w-3.5" />
-            ) : (
-              <Icons.work className="h-3.5 w-3.5" />
-            )}
+            <Icons.work className="h-3.5 w-3.5" />
           </span>
         </div>
       </div>

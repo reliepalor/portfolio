@@ -28,6 +28,10 @@ const getHoverColorClass = (skillName: string) => {
     return "hover:text-[#535353]";
   if (normalized === "postman") return "hover:text-[#FF2D20]";
   if (normalized === "vercel") return "hover:text-[#4c4c4c]";
+  if (normalized === "next.js") return "hover:text-[#000000] dark:hover:text-white";
+  if (normalized === "node.js") return "hover:text-[#339933]";
+  if (normalized === "postgresql") return "hover:text-[#336791]";
+  if (normalized === "docker") return "hover:text-[#2496ED]";
   return "hover:text-primary";
 };
 
@@ -41,9 +45,10 @@ const getGroupLabel = (skillName: string) => {
     "angular",
     "tailwind css",
     "javascript",
+    "next.js",
   ]);
 
-  const backend = new Set(["php", "laravel", ".net", "express", "express.js"]);
+  const backend = new Set(["php", "laravel", ".net", "express", "express.js", "node.js"]);
 
   const database = new Set([
     "mysql",
@@ -51,31 +56,72 @@ const getGroupLabel = (skillName: string) => {
     "mssql",
     "ms sql",
     "supabase",
+    "postgresql",
   ]);
 
-  const tools = new Set(["git & github", "git", "postman", "vercel"]);
+  const tools = new Set(["git & github", "git", "postman", "vercel", "docker"]);
 
   if (frontend.has(normalized)) return "Frontend";
   if (backend.has(normalized)) return "Backend";
   if (database.has(normalized)) return "Database";
   if (tools.has(normalized)) return "Tools";
-  return "Others";
+  return "";
 };
 
-const groupOrder = ["Frontend", "Backend", "Database", "Tools", "Others"];
+// Left column: Frontend, Backend
+// Right column: Database, Tools
+const leftGroupOrder = ["Frontend", "Backend"];
+const rightGroupOrder = ["Database", "Tools"];
 
 export default function SkillsCard({ skills, compactMobile = false }: SkillsCardProps) {
-  const groupedSkills = groupOrder
-    .map((label) => ({
-      label,
-      items: skills.filter((skill) => getGroupLabel(skill.name) === label),
-    }))
-    .filter((group) => group.items.length > 0);
+  const buildGroups = (order: string[]) =>
+    order
+      .map((label) => ({
+        label,
+        items: skills.filter((skill) => getGroupLabel(skill.name) === label),
+      }))
+      .filter((group) => group.items.length > 0);
 
-  /* ── Mobile: grouped rows ── */
+  const leftGroups = buildGroups(leftGroupOrder);
+  const rightGroups = buildGroups(rightGroupOrder);
+  const allGroups = [...leftGroups, ...rightGroups];
+
+  const renderGroup = (group: { label: string; items: skillsInterface[] }, index: number) => (
+    <motion.div
+      key={group.label}
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.38, delay: index * 0.12, ease: "easeOut" }}
+    >
+      <div className="py-3.5">
+        <span className="text-[11px] tracking-widest uppercase text-muted-foreground/40 font-sans">
+          {group.label}
+        </span>
+        <div className="mt-2.5 flex flex-wrap gap-x-4 gap-y-2">
+          {group.items.map((skill) => {
+            const Icon = (Icons as any)[skill.icon];
+            return (
+              <div
+                key={skill.name}
+                className={`flex items-center gap-1.5 text-[13px] text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
+              >
+                {Icon ? <Icon className="h-3.5 w-3.5 shrink-0" /> : null}
+                <span>{skill.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  const Divider = () => <div className="col-span-2 h-px bg-border" />;
+
+  /* ── Mobile: grouped rows, single column ── */
   const mobileView = (
-    <div className="sm:hidden space-y-6">
-      {groupedSkills.map((group, index) => (
+    <div className="sm:hidden space-y-5">
+      {allGroups.map((group, index) => (
         <motion.div
           key={group.label}
           initial={{ opacity: 0, y: 8 }}
@@ -83,22 +129,21 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.35, delay: index * 0.18, ease: "easeOut" }}
         >
-          {/* divider + label */}
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-[11px] tracking-widest uppercase text-muted-foreground/50 font-sans whitespace-nowrap">
+          <div className="flex items-center gap-3 mb-2.5">
+            <span className="text-[10px] tracking-widest uppercase text-muted-foreground/50 font-sans whitespace-nowrap">
               {group.label}
             </span>
             <div className="flex-1 h-px bg-border" />
           </div>
-          <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+          <div className="grid grid-cols-2 gap-y-2.5 gap-x-3">
             {group.items.map((skill) => {
               const Icon = (Icons as any)[skill.icon];
               return (
                 <button
                   key={skill.name}
-                  className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 ${getHoverColorClass(skill.name)}`}
+                  className={`flex items-center gap-2 text-[13px] text-muted-foreground transition-colors duration-200 ${getHoverColorClass(skill.name)}`}
                 >
-                  {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
+                  {Icon ? <Icon className="h-3.5 w-3.5 shrink-0" /> : null}
                   <span>{skill.name}</span>
                 </button>
               );
@@ -109,42 +154,33 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
     </div>
   );
 
-  /* ── Desktop: two-column FAQ-style layout ── */
+  /* ── Desktop: two-column layout — Frontend/Backend left, Database/Tools right ──
+     A single grid with full-width divider rows keeps the left/right lines
+     perfectly aligned regardless of how many items each group contains. ── */
   const desktopView = (
-    <div className="hidden sm:block w-full">
-      {groupedSkills.map((group, index) => (
-        <motion.div
-          key={group.label}
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.38, delay: index * 0.18, ease: "easeOut" }}
-        >
-          {/* top divider */}
-          <div className="h-px bg-border" />
-          <div className="py-5">
-            <span className="text-xs tracking-widest uppercase text-muted-foreground/40 font-sans">
-              {group.label}
-            </span>
-            <div className="mt-3 flex flex-wrap gap-x-8 gap-y-3">
-              {group.items.map((skill) => {
-                const Icon = (Icons as any)[skill.icon];
-                return (
-                  <div
-                    key={skill.name}
-                    className={`flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
-                  >
-                    {Icon ? <Icon className="h-4 w-4 shrink-0" /> : null}
-                    <span>{skill.name}</span>
-                  </div>
-                );
-              })}
-            </div>
+    <div className="hidden sm:grid w-full grid-cols-[1fr_1fr] gap-x-10">
+      <Divider />
+      {leftGroups.map((group, index) => (
+        <div key={group.label} className="contents">
+          <div className="py-0.5">{renderGroup(group, index)}</div>
+          <div className="py-0.5">
+            {rightGroups[index]
+              ? renderGroup(rightGroups[index], index + leftGroups.length)
+              : null}
           </div>
-        </motion.div>
+          <Divider />
+        </div>
       ))}
-      {/* bottom divider */}
-      <div className="h-px bg-border" />
+      {rightGroups.slice(leftGroups.length).map((group, i) => {
+        const index = i + leftGroups.length;
+        return (
+          <div key={group.label} className="contents">
+            <div className="py-0.5" />
+            <div className="py-0.5">{renderGroup(group, index + leftGroups.length)}</div>
+            <Divider />
+          </div>
+        );
+      })}
     </div>
   );
 
@@ -164,11 +200,11 @@ export default function SkillsCard({ skills, compactMobile = false }: SkillsCard
       {skills.map((skill) => (
         <div key={skill.name}>
           <div
-            className={`flex items-center gap-3 py-4 text-sm text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
+            className={`flex items-center gap-3 py-3.5 text-[13px] text-muted-foreground transition-colors duration-200 cursor-default ${getHoverColorClass(skill.name)}`}
           >
             {(() => {
               const Icon = (Icons as any)[skill.icon];
-              return Icon ? <Icon className="h-4 w-4 shrink-0 ml-[11.5rem]" /> : null;
+              return Icon ? <Icon className="h-3.5 w-3.5 shrink-0 ml-[11.5rem]" /> : null;
             })()}
             <span>{skill.name}</span>
           </div>

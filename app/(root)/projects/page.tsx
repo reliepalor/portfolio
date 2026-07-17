@@ -37,7 +37,7 @@ const renderContent = (tabVal: string) => {
                 <div className="relative aspect-[16/10.2] rounded-md bg-[#e4e4e4] dark:bg-[#2a2a2a] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-7">
                   <div className="relative h-[72%] w-[70%]">
                     <Image
-                      src={project.companyLogoImg}
+                      src={Array.isArray(project.companyLogoImg) ? project.companyLogoImg[0] : project.companyLogoImg}
                       alt={`${project.companyName} preview`}
                       fill
                       className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
@@ -49,9 +49,6 @@ const renderContent = (tabVal: string) => {
                 <div className="px-0 py-3.5">
                   <p className="text-lg sm:text-xl font-normal text-foreground leading-[1.25] mb-1">
                     {project.companyName}
-                  </p>
-                  <p className="text-sm sm:text-base text-foreground/90 font-light leading-none">
-                    {project.type}
                   </p>
                 </div>
               </Link>

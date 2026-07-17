@@ -16,7 +16,7 @@ export type ProjectViewMode = "user" | "admin";
 
 export interface ProjectPreviewContent {
   shortDescription: string;
-  companyLogoImg: string;
+  companyLogoImg: string | string[];
   descriptionDetails: DescriptionDetailsInterface;
   pagesInfoArr: PagesInfoInterface[];
 }
@@ -38,7 +38,7 @@ export interface ProjectInterface {
   techStack: ValidSkills[];
   startDate: string;
   endDate: string;
-  companyLogoImg: any;
+  companyLogoImg: string | string[];
   descriptionDetails: DescriptionDetailsInterface;
   pagesInfoArr: PagesInfoInterface[];
   adminPreview?: ProjectPreviewContent;
@@ -179,12 +179,12 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Typescript", "Angular", "express.js", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
-    companyLogoImg: "/projects/jaya/jaya-project.png",
+    companyLogoImg: ["/projects/jaya/jaya1.png", "/projects/jaya/jaya2.png"],
     pagesInfoArr: [
       {
         title: " ",
         description: "",
-        imgArr: ["/projects/jaya/jaya-project.png"]
+        imgArr: ["/projects/jaya/jaya1.png", "/projects/jaya/jaya2.png"]
       },
     
     ],

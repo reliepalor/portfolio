@@ -30,7 +30,7 @@ export const skillsUnsorted: skillsInterface[] = [
     icon: "angular",
   },
   {
-    name: "Tailwind CSS",
+    name: "Tailwind",
     description:
       "Design beautiful, modern websites faster with a utility-first CSS framework.",
     rating: 5,
@@ -106,12 +106,36 @@ export const skillsUnsorted: skillsInterface[] = [
       rating: 4,
       icon: "mssql",
     },
-    {
-      name: "Express.js",
-      description: "Fast, unopinionated, minimalist web framework for Node.js.",
-      rating: 5,
-      icon: "express",
-    },
+  {
+    name: "Express.js",
+    description: "Fast, unopinionated, minimalist web framework for Node.js.",
+    rating: 5,
+    icon: "express",
+  },
+  {
+    name: "Next.js",
+    description: "React framework for production — SSR, SSG, and routing built in.",
+    rating: 5,
+    icon: "nextjs",
+  },
+  {
+    name: "Node.js",
+    description: "JavaScript runtime for building fast, scalable server-side applications.",
+    rating: 5,
+    icon: "nodejs",
+  },
+  {
+    name: "PostgreSQL",
+    description: "Powerful, open-source object-relational database system.",
+    rating: 4,
+    icon: "postgresql",
+  },
+  {
+    name: "Docker",
+    description: "Containerization platform for building, shipping, and running apps.",
+    rating: 4,
+    icon: "docker",
+  },
 
 ];
 

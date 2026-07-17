@@ -4,7 +4,7 @@ export const siteConfig = {
   gmail: "reliepalor15",
   username: "reliee/",
   description:
-    "Hello, I'm Relie. A web developer who builds web applications with a focus on clarity and practical design. The aim is software that feels simple to use and easy to maintain. Work usually centers on turning ideas into useful tools on the web, with attention to structure. Still learning, building, and improving with every project.",
+    "Hi, I'm Relie. I build modern web applications and enjoy learning how great software is designed. My interests include full-stack development, API integrations, software architecture, and AI-powered applications. I'm always looking for opportunities to improve through building.",
   url: "http://localhost:3000", // leave blank until deployed
   links: {
     twitter: "", // none provided
