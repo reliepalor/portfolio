@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
 import { ThemeProvider } from "@/components/common/theme-provider";
@@ -12,6 +12,12 @@ import { cn } from "@/lib/utils";
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const fontHeading = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-heading",
 });
 
 interface RootLayoutProps {
@@ -87,7 +93,9 @@ export const metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, "font-sans")}>
+      <body
+        className={cn(fontSans.variable, fontHeading.variable, "font-sans")}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

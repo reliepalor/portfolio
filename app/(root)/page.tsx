@@ -88,7 +88,7 @@ export default function IndexPage() {
 
             <AnimatedText delay={0.05}>
               <h1 className="text-4xl font-normal tracking-[-0.03em] text-foreground leading-[0.98] lg:text-[2.5rem]">
-                About me
+                John Relie Palor
               </h1>
             </AnimatedText>
 

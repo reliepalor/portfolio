@@ -16,7 +16,7 @@ export default function PageContainer({
   return (
     <ClientPageWrapper>
       <div className="font-raleway">
-        <PageHeader title={title} description={description} />
+        {/* <PageHeader title={title} description={description} /> */}
         <div className="mx-6">{children}</div>
       </div>
     </ClientPageWrapper>

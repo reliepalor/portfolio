@@ -72,7 +72,7 @@ export const Projects: ProjectInterface[] = [
   //Digital Ecommerce
   {
     id: "videogame-ecommerce",
-    companyName: "Video Game E-commerce Platform",
+    companyName: "Outspace | Digital E-commerce",
     type: "Personal",
     category: ["Full Stack", "Web Dev", "API"],
     shortDescription:
@@ -136,7 +136,7 @@ export const Projects: ProjectInterface[] = [
     adminPreview: {
       shortDescription:
         "Admin-side view for order approvals, product key assignment, sales analytics, and management tools.",
-      companyLogoImg: "/projects/videogames/images/op-orders.png",
+      companyLogoImg: "/projects/videogames/images/overview.png",
       descriptionDetails: {
         paragraphs: [
           "This admin-side preview demonstrates how the platform supports staff operations beyond customer purchasing flows.",
@@ -153,13 +153,13 @@ export const Projects: ProjectInterface[] = [
         {
           title: "Admin Dashboard",
           description: "Centralized admin summary for order counts, sales overview, and management shortcuts.",
-          imgArr: ["/projects/videogames/images/op-orders.png"],
-          videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          imgArr: ["/projects/videogames/images/admin-dashboard.png"],
+          videoUrl: "/projects/videogames/images/admin-dashboard.png",
         },
         {
           title: "Order Approval Panel",
           description: "Queue where admins verify purchases and decide approval/rejection status.",
-          imgArr: ["/projects/videogames/images/op-orders.png"],
+          imgArr: ["/projects/videogames/images/approval.png"],
         },
       ],
     },
@@ -199,7 +199,7 @@ export const Projects: ProjectInterface[] = [
   //Smart Library
   {
     id: "smart-lib",
-    companyName: "Smart Lib: Digital Library Management",
+    companyName: "Smart Lib | Digital Library Management",
     type: "Academics",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
@@ -245,7 +245,7 @@ export const Projects: ProjectInterface[] = [
   //Pet Ecommerce
   {
     id: "paw-haven",
-    companyName: "Paw Haven - Pet Ecommerce",
+    companyName: "Paw Haven | Pet Ecommerce",
     type: "Academics",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
@@ -292,7 +292,7 @@ export const Projects: ProjectInterface[] = [
   //Math Games
   {
     id: "math-games",
-    companyName: "Math Quest (Elementary Math Games)",
+    companyName: "Math Quest ",
     type: "Personal",
     category: ["Web Dev", "Frontend", "UI/UX"],
     shortDescription:
