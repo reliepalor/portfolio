@@ -16,17 +16,18 @@ export default function ProjectCardImageCarousel({
   className = "",
 }: ProjectCardImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [failedSrcs, setFailedSrcs] = useState<string[]>([]);
 
   const validImages = images.filter((src) => !failedSrcs.includes(src));
 
   useEffect(() => {
-    if (validImages.length <= 1) return;
+    if (validImages.length <= 1 || isPaused) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % validImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
-  }, [validImages.length]);
+  }, [validImages.length, isPaused]);
 
   useEffect(() => {
     if (activeIndex >= validImages.length) {
@@ -37,7 +38,11 @@ export default function ProjectCardImageCarousel({
   if (validImages.length === 0) return null;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div
+      className="relative w-full h-full flex items-center justify-center"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <AnimatePresence initial={false}>
         {validImages.map((src, index) =>
           index === activeIndex ? (

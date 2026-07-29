@@ -22,12 +22,6 @@ export const SocialLinks: SocialInterface[] = [
     link: siteConfig.links.linkedin,
   },
   {
-    name: "Twitter",
-    username: `@${siteConfig.username}`,
-    icon: Icons.twitter,
-    link: `https://twitter.com/${siteConfig.username}`,
-  },
-  {
     name: "Gmail",
     username: "reliepalor15@gmail.com",
     icon: Icons.gmail,

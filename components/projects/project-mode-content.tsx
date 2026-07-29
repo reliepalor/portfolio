@@ -26,14 +26,15 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
     ? activeContent.companyLogoImg
     : [activeContent.companyLogoImg];
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (heroImages.length <= 1) return;
+    if (heroImages.length <= 1 || isPaused) return;
     const timer = setInterval(() => {
       setActiveHeroIndex((prev) => (prev + 1) % heroImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
-  }, [heroImages.length]);
+  }, [heroImages.length, isPaused]);
 
   return (
     <>
@@ -82,7 +83,10 @@ export default function ProjectModeContent({ project }: { project: ProjectInterf
         </section>
 
         {/* Hero image */}
-        <section>
+        <section
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <AnimatePresence mode="wait" initial={false}>
             {heroImages.map((src, index) =>
               index === activeHeroIndex ? (

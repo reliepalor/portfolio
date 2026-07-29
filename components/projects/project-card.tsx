@@ -26,14 +26,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     ? project.companyLogoImg
     : [project.companyLogoImg];
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (logoImages.length <= 1) return;
+    if (logoImages.length <= 1 || isPaused) return;
     const timer = setInterval(() => {
       setActiveImageIndex((prev) => (prev + 1) % logoImages.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
-  }, [logoImages.length]);
+  }, [logoImages.length, isPaused]);
 
   return (
     <motion.article
@@ -43,7 +44,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true, margin: "-120px" }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[16/11]">
+      <div
+        className="relative aspect-[4/3] overflow-hidden lg:aspect-[16/11]"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <AnimatePresence mode="wait" initial={false}>
           {logoImages.map((src, index) =>
             index === activeImageIndex ? (

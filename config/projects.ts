@@ -91,13 +91,13 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: "2025-12-01",
     endDate: "2026-01-20",
-    companyLogoImg: "/projects/videogames/images/op-landingpage.png",
+    companyLogoImg: ["/projects/videogames/images/outspace1.png", "/projects/videogames/images/outspace2.png"],
     pagesInfoArr: [
       {
         title: "User Welcome Page",
         description:
           "Users can view the Welcome Page with some videogames graphics.",
-        imgArr: ["/projects/videogames/images/op-landingpage.png"],
+        imgArr: ["/projects/videogames/images/outspace1.png", "/projects/videogames/images/outspace2.png"],
         videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       },
       {
@@ -179,12 +179,12 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Typescript", "Angular", "express.js", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
-    companyLogoImg: ["/projects/jaya/jaya1.png", "/projects/jaya/jaya2.png"],
+    companyLogoImg: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"],
     pagesInfoArr: [
       {
         title: " ",
         description: "",
-        imgArr: ["/projects/jaya/jaya1.png", "/projects/jaya/jaya2.png"]
+        imgArr: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"]
       },
     
     ],
@@ -289,45 +289,7 @@ export const Projects: ProjectInterface[] = [
     },
   },
 
-  //Math Games
-  {
-    id: "math-games",
-    companyName: "Math Quest ",
-    type: "Personal",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "A collection of interactive math games for elementary students, designed to make learning fun and engaging.",
-    websiteLink: undefined,
-    githubLink: undefined,
-    liveDemoNote: "Live demo is not available yet.",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
-    startDate: "2023-07-01", // adjust
-    endDate: "2023-07-14",
-    companyLogoImg: "/projects/math-games/math-bg.png",
-    pagesInfoArr: [
-      {
-        title: "Games",
-        description: "Selection of interactive math games with different levels.",
-        imgArr: ["/projects/math-games/games.png"],
-      },
-      {
-        title: "Game Description",
-        description: "Interactive gameplay with description for children to follow instructions.",
-        imgArr: ["/projects/math-games/description.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "Math Quest is a set of browser-based math games built to help elementary students practice essential arithmetic skills while having fun.",
-        "Each game comes with multiple levels, increasing in difficulty to match students' learning pace.",
-      ],
-      bullets: [
-        "Created multiple interactive math games with different levels.",
-        "Built with vanilla HTML, CSS, and JavaScript for simplicity.",
-        "Focused on making math engaging for younger learners.",
-      ],
-    },
-  },
+
   
   // {
   //   id: "web-portfolio",
