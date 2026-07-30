@@ -69,6 +69,43 @@ export function getProjectPreviewByMode(
 }
 
 export const Projects: ProjectInterface[] = [
+     //JAYA AI
+  {
+    id: "jaya",
+    companyName: "Jaya | Just ask your AI",
+    type: "Academics",
+    category: ["Web Dev", "Full Stack", "AI"],
+    shortDescription:
+      "An AI-powered quiz platform that generates personalized quizzes on any topic in real time, using the Groq API for fast inference with OpenRouter as a fallback provider. Built with a TypeScript/Angular frontend and an Express.js backend handling AI-driven question generation, scoring, and adaptive feedback.",
+    websiteLink: "https://jaya-ai.vercel.app/",
+    githubLink: "https://github.com/reliepalor/quzzie.git",
+    liveDemoNote: "Jaya AI generates custom quizzes on any topic using Groq (with OpenRouter as fallback) and turns learning into an interactive game.",    techStack: ["Typescript", "Angular", "express.js", "AI"],
+    startDate: "2023-03-01", // adjust
+    endDate: "2023-06-01",
+    companyLogoImg: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"],
+    pagesInfoArr: [
+      {
+        title: " ",
+        description: "",
+        imgArr: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"]
+      },
+    
+    ],
+    descriptionDetails: {
+    paragraphs: [
+      "Jaya AI is a full-stack quiz platform that turns any topic into a personalized, AI-generated quiz. Instead of static question banks, quizzes are generated on demand — the AI creates unique questions, answer choices, and explanations for whatever subject the user enters.",
+      "The backend integrates the Groq API for fast AI inference, with OpenRouter configured as a fallback provider — [reasoning for fallback choice, once you confirm].",
+      "[What you specifically built — once confirmed]",
+    ],
+    bullets: [
+      "Built the quiz generation flow using Groq's API for low-latency AI responses.",
+      "Configured OpenRouter as a fallback provider to maintain reliability [if AI service is down/rate-limited].",
+      "Designed the frontend in Angular with TypeScript for a responsive, interactive quiz experience.",
+      "Built the Express.js backend to handle AI requests, quiz session logic, and scoring.",
+    ],
+  },
+  },
+
   //Digital Ecommerce
   {
     id: "videogame-ecommerce",
@@ -76,9 +113,9 @@ export const Projects: ProjectInterface[] = [
     type: "Personal",
     category: ["Full Stack", "Web Dev", "API"],
     shortDescription:
-      "A full-stack video game e-commerce platform featuring cart management, order approval workflow, admin dashboard analytics, and a review & rating system.",
+  "A full-stack video game e-commerce platform with separate user and admin experiences — cart management, an order approval workflow, and a review & rating system on the customer side, backed by an admin dashboard with sales analytics and product key management. Built with ASP.NET Core Web API, Entity Framework Core, and Angular, secured with JWT authentication.",
     websiteLink: "https://outspace.vercel.app",
-    githubLink: undefined,
+    githubLink: "https://github.com/reliepalor/videogames.git",
     liveDemoNote:
       "This live demo uses mock data and a mock environment, not the full production setup. Some features and data may be incomplete, inaccurate, or may not function as expected.\n\nCredentials for Admin\nAdmin: Admin@test.com\nPassword: Admin@123",
     techStack: [
@@ -165,36 +202,6 @@ export const Projects: ProjectInterface[] = [
     },
   },
 
-    //JAYA AI
-  {
-    id: "jaya",
-    companyName: "Jaya | Just ask your AI",
-    type: "Academics",
-    category: ["Web Dev", "Full Stack", "AI"],
-    shortDescription:
-      "Jaya AI is a vibrant AI-powered quiz adventure that turns any topic into fun, personalized challenges with playful visuals and instant feedback that keeps users coming back for more.",
-    websiteLink: "https://jaya-ai.vercel.app/",
-    githubLink: undefined,
-    liveDemoNote: "Quizzie is a fun app that creates custom quizzes on any topic and makes learning feel like a game..",
-    techStack: ["Typescript", "Angular", "express.js", "AI"],
-    startDate: "2023-03-01", // adjust
-    endDate: "2023-06-01",
-    companyLogoImg: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"],
-    pagesInfoArr: [
-      {
-        title: " ",
-        description: "",
-        imgArr: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"]
-      },
-    
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "",
-      ],
-      bullets: [],
-    },
-  },
 
   //Smart Library
   {
@@ -205,7 +212,7 @@ export const Projects: ProjectInterface[] = [
     shortDescription:
       "A Laravel-based library system with QR-based book borrowing/returning, real-time book availability, and study space tracking.",
     websiteLink: undefined,
-    githubLink: undefined,
+    githubLink: "https://github.com/reliepalor/library.git",
     liveDemoNote: "Live demo is not available yet.",
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-03-01", // adjust
@@ -251,7 +258,7 @@ export const Projects: ProjectInterface[] = [
     shortDescription:
       "A Laravel and Tailwind-based pet eCommerce platform where users can browse and order pets, accessories, and food, complete with email order confirmations.",
     websiteLink: undefined,
-    githubLink: undefined,
+    githubLink: "https://github.com/reliepalor/pets.git",
     liveDemoNote: "Live demo is not available yet.",
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-01-01", 

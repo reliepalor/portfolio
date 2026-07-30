@@ -22,9 +22,15 @@ export const SocialLinks: SocialInterface[] = [
     link: siteConfig.links.linkedin,
   },
   {
+    name: "Resume",
+    username: "View / Download",
+    icon: Icons.resume,
+    link: siteConfig.links.resume,
+  },
+  {
     name: "Gmail",
     username: "reliepalor15@gmail.com",
     icon: Icons.gmail,
-    link: `mailto:${siteConfig.gmail + "."}@gmail.com`,
+    link: `mailto:${siteConfig.gmail + ""}@gmail.com`,
   },
 ];
