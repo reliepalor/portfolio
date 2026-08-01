@@ -78,7 +78,7 @@ export const Projects: ProjectInterface[] = [
     shortDescription:
       "An AI-powered quiz platform that generates personalized quizzes on any topic in real time, using the Groq API for fast inference with OpenRouter as a fallback provider. Built with a TypeScript/Angular frontend and an Express.js backend handling AI-driven question generation, scoring, and adaptive feedback.",
     websiteLink: "https://jaya-ai.vercel.app/",
-    githubLink: "https://github.com/reliepalor/quzzie.git",
+    githubLink: undefined,
     liveDemoNote: "Jaya AI generates custom quizzes on any topic using Groq (with OpenRouter as fallback) and turns learning into an interactive game.",    techStack: ["Typescript", "Angular", "express.js", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",

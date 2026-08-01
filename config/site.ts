@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Relie Palor",
   authorName: "John Relie Palor",
   gmail: "reliepalor15",
-  username: "reliee/",
+  username: "reliee/",  
   description:
     "Hi, I'm Relie. My interests include full-stack development, API integrations, software architecture, and AI-powered applications. I'm always looking for opportunities to improve through continuous building.",
   url: "http://localhost:3000", // leave blank until deployed

@@ -76,7 +76,7 @@ function ThemeToggleButton() {
         </motion.span>
       </AnimatePresence>
       <span className="sr-only">Toggle theme</span>
-    </button>
+    </button> 
   );
 }
 
