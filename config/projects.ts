@@ -217,7 +217,7 @@ export const Projects: ProjectInterface[] = [
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
-    companyLogoImg: "/projects/smart-lib/dashboard.png",
+    companyLogoImg: ["/projects/smart-lib/lib1.png", "/projects/smart-lib/lib2.png"],
     pagesInfoArr: [
       {
         title: "Librarian Dashboard",

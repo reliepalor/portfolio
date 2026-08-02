@@ -4,6 +4,8 @@ import PageContainer from "@/components/common/page-container";
 import ContributionCard from "@/components/contributions/contribution-card";
 import { contributionsUnsorted } from "../../../config/contributions";
 import { pagesConfig } from "../../../config/pages";
+import GithubDotGraph from "@/components/contributions/github-dot-graph";
+
 
 export const metadata: Metadata = {
   title: pagesConfig.contributions.metadata.title,
@@ -16,9 +18,13 @@ export default function ContributonsPage() {
       title={pagesConfig.contributions.title}
       description={pagesConfig.contributions.description}
     >
-      <ContributionCard
-        contributions={contributionsUnsorted}
-      />
+      <GithubDotGraph />
+
+      <div className="mt-12">
+        <ContributionCard
+          contributions={contributionsUnsorted}
+        />
+      </div>
     </PageContainer>
   );
 }

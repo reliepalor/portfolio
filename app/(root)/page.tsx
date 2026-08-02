@@ -27,6 +27,7 @@ import RightVisual from "@/components/common/RightVisual";
 import SplashWrapper from "@/components/ui/splashWrapper";
 import { SocialLinks } from "@/config/socials";
 import { featuredProjects } from "@/config/projects";
+import GithubDotGraph from "@/components/contributions/github-dot-graph";
 
 export const metadata: Metadata = {
   title: pagesConfig.home.metadata.title,
@@ -202,15 +203,12 @@ export default function IndexPage() {
                           <div className="absolute inset-0 transition-colors duration-300 group-hover:bg-black/[0.02] dark:group-hover:bg-white/[0.03]" />
                         </div>
 
-                        {/* Card footer — title + description */}
-                        {/* <div className="px-0 py-3">
-                          <p className="mb-1 text-base font-normal leading-[1.25] text-foreground sm:text-lg">
+                        {/* Project name — below the image */}
+                        <div className="px-0 pt-3">
+                          <p className="font-normal leading-[1.25] text-foreground text-md">
                             {project.companyName}
                           </p>
-                          <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                            {project.shortDescription}
-                          </p>
-                        </div> */}
+                        </div>
                       </Link>
 
                       <div className="mt-3 px-0 pb-3">
@@ -292,7 +290,18 @@ export default function IndexPage() {
         </AnimatedText>
       </AnimatedSection>
 
-
+      {/* ── GitHub Activity ─────────────────────────────────────────────── */}
+      <AnimatedSection
+        direction="right"
+        className="border-t border-border/30 py-12 lg:py-16"
+        id="github"
+      >
+        <div className="mx-auto w-full max-w-[850px] px-6 sm:px-8 mb-10">
+          <AnimatedText>
+            <GithubDotGraph />
+          </AnimatedText>
+        </div>
+      </AnimatedSection>
 
         </ClientPageWrapper>
       </SplashWrapper>
