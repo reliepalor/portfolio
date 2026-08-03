@@ -18,7 +18,7 @@ const RightVisual = ({ delay = 0.4 }: Props) => {
   }, []);
 
   const profileImg =
-    mounted && resolvedTheme === "dark" ? "/profile-dark.png" : "/profileweb.png";
+    mounted && resolvedTheme === "dark" ? "/profile-dark.png" : "/profile-light.png";
 
   return (
     <AnimatedText delay={delay}>
