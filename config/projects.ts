@@ -52,7 +52,7 @@ export function getProjectPreviews(project: ProjectInterface): ProjectPreviewSet
       descriptionDetails: project.descriptionDetails,
       pagesInfoArr: project.pagesInfoArr,
     },
-    admin: project.adminPreview,
+    ...(project.adminPreview ? { admin: project.adminPreview } : {}),
   };
 }
 
@@ -78,8 +78,8 @@ export const Projects: ProjectInterface[] = [
     shortDescription:
       "An AI-powered quiz platform that generates personalized quizzes on any topic in real time, using the Groq API for fast inference with OpenRouter as a fallback provider. Built with a TypeScript/Angular frontend and an Express.js backend handling AI-driven question generation, scoring, and adaptive feedback.",
     websiteLink: "https://jaya-ai.vercel.app/",
-    githubLink: undefined,
-    liveDemoNote: "Jaya AI generates custom quizzes on any topic using Groq (with OpenRouter as fallback) and turns learning into an interactive game.",    techStack: ["Typescript", "Angular", "express.js", "AI"],
+    liveDemoNote: "Jaya AI generates custom quizzes on any topic using Groq (with OpenRouter as fallback) and turns learning into an interactive game.",
+    techStack: ["Typescript", "Angular", "express.js", "AI"],
     startDate: "2023-03-01", // adjust
     endDate: "2023-06-01",
     companyLogoImg: ["/projects/jaya/jaya3.png", "/projects/jaya/jaya2.png"],
@@ -211,7 +211,6 @@ export const Projects: ProjectInterface[] = [
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "A Laravel-based library system with QR-based book borrowing/returning, real-time book availability, and study space tracking.",
-    websiteLink: undefined,
     githubLink: "https://github.com/reliepalor/library.git",
     liveDemoNote: "Live demo is not available yet.",
     techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
@@ -249,53 +248,108 @@ export const Projects: ProjectInterface[] = [
     },
   },
 
-  //Pet Ecommerce
+  // //Pet Ecommerce
+  // {
+  //   id: "paw-haven",
+  //   companyName: "Paw Haven | Pet Ecommerce",
+  //   type: "Academics",
+  //   category: ["Web Dev", "Full Stack", "UI/UX"],
+  //   shortDescription:
+  //     "A Laravel and Tailwind-based pet eCommerce platform where users can browse and order pets, accessories, and food, complete with email order confirmations.",
+  //   githubLink: "https://github.com/reliepalor/pets.git",
+  //   liveDemoNote: "Live demo is not available yet.",
+  //   techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
+  //   startDate: "2023-01-01", 
+  //   endDate: "2023-03-01",
+  //   companyLogoImg: "/projects/paw-haven/vuew.png",
+  //   pagesInfoArr: [
+  //     {
+  //       title: "Landing Page",
+  //       description: "A clean landing page showcasing featured pets, products, and offers.",
+  //       imgArr: ["/projects/paw-haven/vuew.png"],
+  //     },
+  //     {
+  //       title: "Product Browsing",
+  //       description: "Browse pets, accessories, and food with category filters.",
+  //       imgArr: ["/projects/paw-haven/vuew.png"],
+  //     },
+  //     {
+  //       title: "Order System",
+  //       description: "Integrated checkout with order confirmation via email.",
+  //       imgArr: ["/projects/paw-haven/vuew.png"],
+  //     },
+  //   ],
+  //   descriptionDetails: {
+  //     paragraphs: [
+  //       "Paw Haven is a full-featured eCommerce web application tailored for pet lovers. Users can easily explore and purchase pets, accessories, and food items, all within a single platform.",
+  //       "The system leverages Laravel and MySQL on the backend, with Tailwind CSS providing a responsive and modern design. Firebase is integrated for authentication and real-time functionality.",
+  //       "A key highlight is the email notification system that confirms orders, ensuring users receive instant updates on their purchases.",
+  //     ],
+  //     bullets: [
+  //       "Built a complete eCommerce platform using Laravel and Tailwind CSS.",
+  //       "Implemented product browsing for pets, accessories, and food.",
+  //       "Integrated Firebase for authentication and notifications.",
+  //       "Added order confirmation system with automated email alerts.",
+  //     ],
+  //   },
+  // },
+
+  //Rentify
   {
-    id: "paw-haven",
-    companyName: "Paw Haven | Pet Ecommerce",
+    id: "rentify",
+    companyName: "Rentify | Rental Marketplace",
     type: "Academics",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
-      "A Laravel and Tailwind-based pet eCommerce platform where users can browse and order pets, accessories, and food, complete with email order confirmations.",
+      "A modern rental marketplace web app where landlords can list verified properties and tenants can browse, search, and apply for rentals.",
     websiteLink: undefined,
-    githubLink: "https://github.com/reliepalor/pets.git",
+    githubLink: "https://github.com/reliepalor/rentify",
     liveDemoNote: "Live demo is not available yet.",
-    techStack: ["Laravel", "PHP", "Firebase", "MySQL", "Tailwind CSS"],
-    startDate: "2023-01-01", 
-    endDate: "2023-03-01",
-    companyLogoImg: "/projects/paw-haven/vuew.png",
+    techStack: ["Angular", "Typescript", "Supabase", "Tailwind CSS", "Sass"],
+    startDate: "2024-01-01",
+    endDate: "2024-06-01",
+    companyLogoImg: ["/projects/rentify/rentify1.png", "/projects/rentify/rentify2.png"],
     pagesInfoArr: [
       {
         title: "Landing Page",
-        description: "A clean landing page showcasing featured pets, products, and offers.",
-        imgArr: ["/projects/paw-haven/vuew.png"],
+        description:
+          "A modern landing page that introduces the platform and highlights the experience for both landlords and tenants.",
+        imgArr: ["/projects/rentify/landingpage.png"],
       },
       {
-        title: "Product Browsing",
-        description: "Browse pets, accessories, and food with category filters.",
-        imgArr: ["/projects/paw-haven/vuew.png"],
+        title: "Property Browsing",
+        description:
+          "Tenants can browse approved properties and units, with search and filter options for location and price.",
+        imgArr: ["/projects/rentify/property-browsing.png"],
       },
       {
-        title: "Order System",
-        description: "Integrated checkout with order confirmation via email.",
-        imgArr: ["/projects/paw-haven/vuew.png"],
+        title: "Landlord Dashboard",
+        description:
+          "Landlords can manage properties, create units, upload images, and review tenant applications from one dashboard.",
+        imgArr: ["/projects/rentify/landlord-dashboard.png"],
+      },
+      {
+        title: "Verification & Application Flow",
+        description:
+          "Landlords can submit verification documents, while tenants can apply for units through a structured workflow.",
+        imgArr: ["/projects/rentify/verification-flow.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "Paw Haven is a full-featured eCommerce web application tailored for pet lovers. Users can easily explore and purchase pets, accessories, and food items, all within a single platform.",
-        "The system leverages Laravel and MySQL on the backend, with Tailwind CSS providing a responsive and modern design. Firebase is integrated for authentication and real-time functionality.",
-        "A key highlight is the email notification system that confirms orders, ensuring users receive instant updates on their purchases.",
+        "Rentify is a full-stack rental marketplace web application designed to connect landlords and tenants through a trusted and streamlined platform.",
+        "The system allows landlords to register, upload verification documents, manage property listings and units, and review tenant applications. Tenants can browse approved listings, search by location and budget, and submit applications for units they are interested in.",
+        "Built with Angular and Supabase, the project highlights role-based authentication, file uploads, approval workflows, and a responsive UI tailored for real-world rental operations.",
       ],
       bullets: [
-        "Built a complete eCommerce platform using Laravel and Tailwind CSS.",
-        "Implemented product browsing for pets, accessories, and food.",
-        "Integrated Firebase for authentication and notifications.",
-        "Added order confirmation system with automated email alerts.",
+        "Developed a rental marketplace with separate landlord and tenant workflows.",
+        "Implemented secure authentication and role-based access using Angular and Supabase.",
+        "Added landlord verification with document uploads and admin review status.",
+        "Built property and unit management features including image uploads and approval workflow.",
+        "Enabled tenant search and filtering for property listings and unit applications.",
       ],
     },
-  },
-
+  }
 
   
   // {

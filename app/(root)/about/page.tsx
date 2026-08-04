@@ -70,7 +70,7 @@ export default function AboutPage() {
       title={pagesConfig.about?.title ?? "About"}
       description={pagesConfig.about?.description ?? "A little about my path so far."}
     >
-      <div className="mx-auto w-full max-w-3xl space-y-10">
+      <div className="mx-auto w-full max-w-3xl space-y-10 mb-16">
         {/* Header */}
         <div className="animate-in fade-in slide-in-from-bottom-2 duration-500 space-y-4">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
@@ -87,7 +87,7 @@ export default function AboutPage() {
           group relative overflow-hidden rounded-2xl border border-border/60 bg-background p-6 sm:p-8
           transition-colors hover:border-foreground/30"
         >
-          <div className="flex items-start justify-between gap-4">
+          <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border/60 bg-muted/30 transition-colors group-hover:bg-muted/60">
                 <Briefcase className="h-5 w-5" />
@@ -130,11 +130,10 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold tracking-tight">Freelance</h2>
           </div>
           <p className="text-sm text-muted-foreground">
-            Designed, built, and delivered complete systems for clients
-            from initial requirements to a working product in production.
+            Built client systems from requirements to delivery.
           </p>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-3">
             {aboutData.freelanceProjects.map((project) => (
               <div
                 key={project.name}
@@ -150,7 +149,7 @@ export default function AboutPage() {
               </div>
             ))}
             <div className="rounded-xl border border-dashed border-border/60 p-5 text-sm text-muted-foreground">
-              Plus a few other client projects delivered along the way.
+              And a few more client projects.
             </div>
           </div>
         </section>
@@ -165,9 +164,8 @@ export default function AboutPage() {
           </div>
           <div className="rounded-xl border border-border/60 bg-muted/20 p-5 transition-colors hover:bg-muted/40">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Alongside freelance work, I&apos;ve developed capstone and
-              research systems for university clients helping students turn
-              their thesis concepts into working, presentable software.
+              I&apos;ve also built capstone and research systems that help turn
+              thesis ideas into working software.
             </p>
           </div>
         </section>
@@ -192,7 +190,7 @@ export default function AboutPage() {
             <Trophy className="h-4 w-4 text-muted-foreground" />
             <h2 className="text-2xl font-bold tracking-tight">Achievements</h2>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-3">
             {aboutData.achievements.map((achievement, index) => (
               <div
                 key={index}

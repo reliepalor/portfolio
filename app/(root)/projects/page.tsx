@@ -5,7 +5,6 @@ import Link from "next/link";
 import { AnimatedSection } from "@/components/common/animated-section";
 import PageContainer from "@/components/common/page-container";
 import LiveDemoButton from "@/components/projects/live-demo-button";
-import { ResponsiveTabs } from "@/components/ui/responsive-tabs";
 import { pagesConfig } from "../../../config/pages";
 import { Projects } from "../../../config/projects";
 
@@ -14,13 +13,8 @@ export const metadata: Metadata = {
   description: pagesConfig.projects.metadata.description,
 };
 
-const renderContent = (tabVal: string) => {
-  let projectArr = Projects;
-  if (tabVal === "personal") {
-    projectArr = projectArr.filter((val) => val.type === "Personal");
-  } else if (tabVal === "professional") {
-    projectArr = projectArr.filter((val) => val.type === "Academics");
-  }
+const renderContent = () => {
+  const projectArr = Projects;
 
   return (
     <div className="mx-auto my-5 w-full max-w-[1500px] px-2 sm:px-4 lg:px-6">
@@ -77,30 +71,12 @@ const renderContent = (tabVal: string) => {
 };
 
 export default function ProjectsPage() {
-  const tabItems = [
-    {
-      value: "all",
-      label: "All",
-      content: renderContent("all"),
-    },
-    {
-      value: "personal",
-      label: "Personal",
-      content: renderContent("personal"),
-    },
-    {
-      value: "professional",
-      label: "Academic",
-      content: renderContent("professional"),
-    },
-  ];
-
   return (
     <PageContainer
       title={pagesConfig.projects.title}
       description={pagesConfig.projects.description}
     >
-      <ResponsiveTabs items={tabItems} defaultValue="all" />
+      {renderContent()}
     </PageContainer>
   );
 }
